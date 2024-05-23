@@ -11,25 +11,17 @@ import java.util.Date;
 @Table(name = "\"Chat\"")
 @Getter
 @Setter
-
 public class Chat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long Chat_id;
-
     @ManyToOne
     @JoinColumn(name = "session_id")
     private SessionRa session;
-
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
-
+    private UserRa user;
     private Date Chat_Date;
     private String Message;
-
-
-
-
 
 }

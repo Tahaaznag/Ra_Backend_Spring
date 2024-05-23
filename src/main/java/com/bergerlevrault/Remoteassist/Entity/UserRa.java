@@ -8,8 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.security.Principal;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
@@ -18,11 +16,11 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "\"User\"")
+@Table(name = "\"UserRa\"")
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
-public class User implements UserDetails , Principal {
+public class UserRa implements UserDetails , Principal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;

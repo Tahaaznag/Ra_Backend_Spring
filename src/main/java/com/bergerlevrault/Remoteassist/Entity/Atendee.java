@@ -22,10 +22,10 @@ import java.util.List;
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Atendee {
-
-    @EmbeddedId
-    private AttendeeId id;
-
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int user_id;
+    private int Session_id;
+    private Date date_Debut;
+    private Date date_fin;
 }

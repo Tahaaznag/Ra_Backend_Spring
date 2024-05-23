@@ -25,7 +25,7 @@ public class SessionRa {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserRa user;
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
 
