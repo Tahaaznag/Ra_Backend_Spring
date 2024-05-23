@@ -20,9 +20,8 @@ public class Enrollement {
 //    @JoinColumn(name = "user_id")
 //    private UserRa user;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @ManyToOne
-    private UserRa User_Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long User_Id;
     private int Session_Id;
     private int Role_Id;
 

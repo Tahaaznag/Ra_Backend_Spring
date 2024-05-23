@@ -13,7 +13,7 @@ import java.util.Date;
 @Setter
 public class Chat {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long Chat_id;
     @ManyToOne
     @JoinColumn(name = "session_id")
