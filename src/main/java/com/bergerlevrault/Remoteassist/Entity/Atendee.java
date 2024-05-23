@@ -23,8 +23,8 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Atendee {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int user_id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long user_id;
     private int Session_id;
     private Date date_Debut;
     private Date date_fin;

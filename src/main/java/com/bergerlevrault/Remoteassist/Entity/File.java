@@ -13,11 +13,11 @@ import java.sql.Clob;
 @Table(name = "\"Type\"")
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
-
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
+
     @OneToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;

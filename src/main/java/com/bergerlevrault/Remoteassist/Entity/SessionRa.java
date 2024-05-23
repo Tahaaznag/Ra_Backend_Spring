@@ -13,20 +13,24 @@ import java.util.Set;
 @Table(name = "\"SessionRa\"")
 @Getter
 @Setter
-
 public class SessionRa {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Session_Id;
-    private String Session_Name;
-    private Date Date_debut;
-    private Date Date_fin;
-    private  int User_Id;
+    private long sessionId;
+
+    private String sessionName;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateDebut;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date dateFin;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserRa user;
+
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
-
 }
