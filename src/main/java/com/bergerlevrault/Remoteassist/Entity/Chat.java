@@ -2,6 +2,7 @@ package com.bergerlevrault.Remoteassist.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Entity
@@ -21,7 +22,7 @@ public class Chat {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserRa user;
-    private Date Chat_Date;
+    private Timestamp Chat_Date;
     private String Message;
 
 }

@@ -33,4 +33,10 @@ public class SessionRa {
 
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
+
+    @OneToMany(mappedBy = "session")
+    private Set<Enrollement> enrollements;
+
+    @OneToMany(mappedBy = "session")
+    private Set<Enrollement> attendee;
 }

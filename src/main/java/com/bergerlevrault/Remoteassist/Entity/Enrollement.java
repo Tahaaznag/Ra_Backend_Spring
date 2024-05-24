@@ -19,11 +19,22 @@ public class Enrollement {
 //    @MapsId("userId")
 //    @JoinColumn(name = "user_id")
 //    private UserRa user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long User_Id;
-    private int Session_Id;
-    private int Role_Id;
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "User_Id", referencedColumnName = "userId")
+    private UserRa user;
+
+    @ManyToOne
+    @JoinColumn(name = "Session_Id", referencedColumnName = "sessionId")
+    private SessionRa session;
+
+    @ManyToOne
+    @JoinColumn(name = "Role_Id", referencedColumnName = "Role_Id")
+    private Role role;
 
 
 

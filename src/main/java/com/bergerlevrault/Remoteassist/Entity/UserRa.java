@@ -22,8 +22,15 @@ public class UserRa {
     private String prenom;
     private String email;
     private String password;
-    private Boolean isAdmin;
+   // private Boolean isAdmin;
+    private Boolean isAdmin = false;
     @OneToMany(mappedBy = "user")
     private Set<SessionRa> sessions;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Enrollement> enrollements;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Enrollement> attendee;
 
 }
