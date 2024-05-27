@@ -10,7 +10,7 @@ import java.sql.Clob;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "\"Type\"")
+@Table(name = "\"FileChat\"")
 @Getter
 @Setter
 public class File {

@@ -37,7 +37,6 @@ public class Enrollement {
     private Role role;
 
 
-
 }
 
 

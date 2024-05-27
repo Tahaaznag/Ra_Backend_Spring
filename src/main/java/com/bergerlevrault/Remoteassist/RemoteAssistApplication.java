@@ -8,6 +8,7 @@ public class RemoteAssistApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(RemoteAssistApplication.class, args);
+
 	}
 
 }
