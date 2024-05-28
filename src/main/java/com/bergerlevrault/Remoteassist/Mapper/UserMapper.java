@@ -9,15 +9,18 @@ import org.mapstruct.factory.Mappers;
 
 import java.util.List;
 
-@Mapper
+
+@Mapper(componentModel = "spring")
 public interface UserMapper {
+
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    @Mapping(source = "isAdmin", target = "admin")
+
     UserRa mapToUser(UserRaDto userDto);
 
-    @Mapping(source = "admin", target = "isAdmin")
     UserRaDto mapToDto(UserRa user);
+
     List<UserRaDto> mapToDtoList(List<UserRa> users);
+
     void updateUserFromDto(UserRaDto userDto, @MappingTarget UserRa user);
 }

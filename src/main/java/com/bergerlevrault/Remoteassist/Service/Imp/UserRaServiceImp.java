@@ -39,16 +39,19 @@ public class UserRaServiceImp implements UserRaService {
         return Optional.empty();
     }
 
+
+
     @Override
     public UserRaDto updateUser(Long id, UserRaDto userDto) {
-        return userRaRepo.findById(id).map(user -> {
-            user.setEmail(userDto.getEmail());
-            user.setNom(userDto.getNom());
-            user.setPrenom(userDto.getPrenom());
-            user.setIsAdmin(userDto.getIsAdmin());
-            user.setSessions(userDto.getSessions());
-            return userRaRepo.save(user);
-        }).orElseThrow(() -> new RuntimeException("User not found with id " + id));
+        Optional<UserRa> optionalUser = userRaRepo.findById(id);
+        if (optionalUser.isPresent()) {
+            UserRa userToUpdate = optionalUser.get();
+            userMapper.updateUserFromDto(userDto, userToUpdate);
+            UserRa updatedUser = userRaRepo.save(userToUpdate);
+            return userMapper.mapToDto(updatedUser);
+        } else {
+            throw new RuntimeException("Utilisateur non trouvé avec l'ID : " + id);
+        }
     }
 
     @Override
