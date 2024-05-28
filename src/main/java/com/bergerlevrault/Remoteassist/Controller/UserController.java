@@ -35,7 +35,7 @@ public class UserController {
     }
 
 
-    @GetMapping("userby/{id}")
+    @GetMapping(ResourcesPath.USERS + "/{" + ResourcesPath.USERSID + "}")
     public ResponseEntity<UserRaDto> getUserById(@PathVariable Long id) {
         Optional<UserRaDto> user = userRaService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
