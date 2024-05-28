@@ -1,34 +1,34 @@
 package com.bergerlevrault.Remoteassist.Controller;
 
 import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
-import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Service.Imp.UserRaServiceImp;
+import com.bergerlevrault.Remoteassist.utils.ResourcesPath;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api")
-public class UserControlleur{
+@RequestMapping(ResourcesPath.CLIENT)
+public class UserController {
 
     private final UserRaServiceImp userRaService;
 
-    public UserControlleur(UserRaServiceImp userRaService) {
+    public UserController(UserRaServiceImp userRaService) {
         this.userRaService = userRaService;
     }
 
-    @PostMapping("/new/users")
+
+    @PostMapping(ResourcesPath.USERS)
     public ResponseEntity<UserRaDto> createUser(@RequestBody UserRaDto userDto) {
         UserRaDto ajouteruser = userRaService.createUser(userDto);
         return new ResponseEntity<>(ajouteruser, HttpStatus.OK);
     }
 
 
-    @GetMapping("/all")
+    @GetMapping(ResourcesPath.ALLUSERS)
     public ResponseEntity<List<UserRaDto>> getAllUsers() {
         List<UserRaDto> users = userRaService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
