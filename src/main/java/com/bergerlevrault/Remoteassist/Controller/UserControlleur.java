@@ -1,7 +1,8 @@
-package com.bergerlevrault.Remoteassist.controlleur;
+package com.bergerlevrault.Remoteassist.Controller;
 
+import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
-import com.bergerlevrault.Remoteassist.service.UserRaService;
+import com.bergerlevrault.Remoteassist.Service.Imp.UserRaServiceImp;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,36 +11,37 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class UserControlleur{
 
-    private final UserRaService userRaService;
+    private final UserRaServiceImp userRaService;
 
-    public UserControlleur(UserRaService userRaService) {
+    public UserControlleur(UserRaServiceImp userRaService) {
         this.userRaService = userRaService;
     }
 
     @PostMapping("/new/users")
-    public ResponseEntity<UserRa> createUser(@RequestBody UserRa userDto) {
-        UserRa ajouteruser = userRaService.createUser(userDto);
+    public ResponseEntity<UserRaDto> createUser(@RequestBody UserRaDto userDto) {
+        UserRaDto ajouteruser = userRaService.createUser(userDto);
         return new ResponseEntity<>(ajouteruser, HttpStatus.OK);
     }
     @GetMapping("/all")
-    public ResponseEntity<List<UserRa>> getAllUsers() {
-        List<UserRa> users = userRaService.getAllUsers();
+    public ResponseEntity<List<UserRaDto>> getAllUsers() {
+        List<UserRaDto> users = userRaService.getAllUsers();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
     @GetMapping("userby/{id}")
-    public ResponseEntity<UserRa> getUserById(@PathVariable Long id) {
-        Optional<UserRa> user = userRaService.getUserById(id);
+    public ResponseEntity<UserRaDto> getUserById(@PathVariable Long id) {
+        Optional<UserRaDto> user = userRaService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
     @PutMapping("update/{id}")
-    public ResponseEntity<UserRa> updateUser(@PathVariable Long id, @RequestBody UserRa userDto) {
+    public ResponseEntity<UserRaDto> updateUser(@PathVariable Long id, @RequestBody UserRaDto userDto) {
         try {
-            UserRa updatedUser = userRaService.updateUser(id, userDto);
+            UserRaDto updatedUser = userRaService.updateUser(id, userDto);
             return new ResponseEntity<>(updatedUser, HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);

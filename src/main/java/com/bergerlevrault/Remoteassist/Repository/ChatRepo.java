@@ -1,4 +1,4 @@
-package com.bergerlevrault.Remoteassist.Repo;
+package com.bergerlevrault.Remoteassist.Repository;
 
 import com.bergerlevrault.Remoteassist.Entity.Chat;
 import org.springframework.data.jpa.repository.JpaRepository;

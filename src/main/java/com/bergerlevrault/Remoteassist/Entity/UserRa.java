@@ -1,18 +1,18 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import java.util.Set;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "\"UserRa\"")
 @Getter
 @Setter
+@Table(name = "\"UserRa\"")
 @EntityListeners(AuditingEntityListener.class)
 public class UserRa {
     @Id
@@ -25,5 +25,4 @@ public class UserRa {
     private Boolean isAdmin;
     @OneToMany(mappedBy = "user")
     private Set<SessionRa> sessions;
-
 }
