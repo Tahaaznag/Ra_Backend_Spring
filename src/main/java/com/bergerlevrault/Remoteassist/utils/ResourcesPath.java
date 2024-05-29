@@ -9,4 +9,9 @@ public final class ResourcesPath {
     public static final String LOGIN = "login";
     public static final String LOGOUT = "logout";
     public static final String ALLUSERS = "all";
+
+    public static final String CREATIONSESSION = "create";
+    public static final String SESSION = "api/session";
+    public static final String ALLSESSIONS = "all";
+    public static final String ACTIVE = "active";
 }

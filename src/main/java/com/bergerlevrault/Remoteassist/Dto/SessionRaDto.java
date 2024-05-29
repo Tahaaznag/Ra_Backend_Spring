@@ -31,4 +31,6 @@ public class SessionRaDto {
     private Set<EnrollementDto> enrollements;
 
     private Set<EnrollementDto> attendee;
+
+
 }

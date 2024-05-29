@@ -10,14 +10,14 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "\"SessionRa\"")
+@Table(name = "SessionRa")
 @Getter
 @Setter
 public class SessionRa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long sessionId;
+    private Long sessionId;
 
     private String sessionName;
 
@@ -38,5 +38,11 @@ public class SessionRa {
     private Set<Enrollement> enrollements;
 
     @OneToMany(mappedBy = "session")
-    private Set<Enrollement> attendee;
+    private Set<Enrollement> attendees;
+
+    public boolean isActive() {
+        Date now = new Date();
+        return dateDebut.before(now) && dateFin.after(now);
+    }
 }
+

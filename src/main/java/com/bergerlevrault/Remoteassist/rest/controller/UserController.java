@@ -1,4 +1,4 @@
-package com.bergerlevrault.Remoteassist.Controller;
+package com.bergerlevrault.Remoteassist.rest.controller;
 
 import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
 import com.bergerlevrault.Remoteassist.Service.Imp.UserRaServiceImp;
