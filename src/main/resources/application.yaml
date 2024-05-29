@@ -13,3 +13,7 @@ spring:
     database-platform: org.hibernate.dialect.MySQLDialect
     hibernate:
       ddl-auto: update
+  spring:
+    mvc:
+      pathmatch:
+        matching-strategy: ANY_PATH_MATCH
