@@ -26,7 +26,7 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<TokenResponse> authenticate(@RequestBody Authentication request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+        return ResponseEntity.ok(authenticationService.authenticate((org.springframework.security.core.Authentication) request));
     }
 
     @GetMapping("/activate-account")

@@ -39,7 +39,6 @@ public class JwtServiceImp implements JwtService {
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .toArray();
-
         return Jwts
                 .builder()
                 .setClaims(extraclaims)
@@ -51,8 +50,6 @@ public class JwtServiceImp implements JwtService {
                 .compact()
                 ;
     }
-
-
 
     private Key getSignWith() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
