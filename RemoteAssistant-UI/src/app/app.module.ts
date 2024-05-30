@@ -20,9 +20,9 @@ export function KcFactory(KcService : KeycloakService){
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [
     HttpClient,
