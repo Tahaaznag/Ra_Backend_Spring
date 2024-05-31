@@ -1,7 +1,12 @@
 package com.bergerlevrault.Remoteassist.Service.Imp;
 
 import com.bergerlevrault.Remoteassist.Service.JwtService;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -9,15 +14,17 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 @Service
 public class JwtServiceImp implements JwtService {
 
-    @Value("${jwt.expiration}")
-    private long jwtExpiration;
-    @Value("${jwt.secret-key}")
-    private String secretKey;
 
+    @Value("${application.security.jwt.expiration}")
+    private long jwtExpiration;
+
+    @Value("${application.security.jwt.secret-key}")
+    private String secretKey;
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
@@ -26,29 +33,28 @@ public class JwtServiceImp implements JwtService {
 
     private Claims extractAllClaims(String token) {
         return Jwts
-                .parser()
+                .parserBuilder()
                 .setSigningKey(getSignWith())
                 .build()
-                .parseClaimsJwt(token)
-                .getBody()
-                ;
+                .parseClaimsJws(token)
+                .getBody();
     }
+
     @Override
-    public String generateToken(Map<String, Object> extraclaims, UserDetails userDetails) {
+    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
         var authorities = userDetails.getAuthorities()
                 .stream()
                 .map(GrantedAuthority::getAuthority)
                 .toArray();
         return Jwts
                 .builder()
-                .setClaims(extraclaims)
+                .setClaims(extraClaims)
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() +jwtExpiration))
-                .claim("authorities",authorities)
+                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .claim("authorities", authorities)
                 .signWith(getSignWith())
-                .compact()
-                ;
+                .compact();
     }
 
     private Key getSignWith() {
@@ -65,7 +71,6 @@ public class JwtServiceImp implements JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
@@ -78,7 +83,4 @@ public class JwtServiceImp implements JwtService {
     private Date extractExpiration(String token) {
         return extractClaim(token, Claims::getExpiration);
     }
-
-
-}
 }

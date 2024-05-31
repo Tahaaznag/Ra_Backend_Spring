@@ -1,5 +1,6 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -10,16 +11,16 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table
 @Getter
 @Setter
-public class Role {;
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int Role_Id;
-    private String Role_name;
-
+    private int roleId;
+    private String name;
     @OneToMany(mappedBy = "role")
     private Set<Enrollement> enrollements;
-
+    @ManyToMany(mappedBy = "roles")
+    @JsonIgnore
+    private List<UserRa> user;
 }

@@ -7,11 +7,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.security.Principal;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static jakarta.persistence.FetchType.EAGER;
 
 @Entity
 @AllArgsConstructor
@@ -19,33 +21,33 @@ import java.util.stream.Collectors;
 @Builder
 @Getter
 @Setter
-@Table(name = "\"UserRa\"")
+@Table(name = "UserRa") // Ne pas besoin des guillemets autour de UserRa
 @EntityListeners(AuditingEntityListener.class)
-public class UserRa implements UserDetails, Principal {
+public class UserRa implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
-    @Getter
     private String nom;
     private String prenom;
     private String email;
     private String password;
     private Boolean isAdmin;
     @OneToMany(mappedBy = "user")
-    private Set<SessionRa> sessions;
-    private Set<Role> roles;
+    private Set<Enrollement> enrollements;
+    @ManyToMany(fetch = EAGER)
+    private List<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getRoleName()))
+        return this.roles
+                .stream()
+                .map(r -> new SimpleGrantedAuthority(r.getName()))
                 .collect(Collectors.toList());
     }
 
-
     @Override
     public String getUsername() {
-        return email;
+        return getUsername();
     }
 
     @Override
@@ -55,20 +57,16 @@ public class UserRa implements UserDetails, Principal {
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return true;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
-    }
-    @Override
-    public String getName() {
-        return email;
+        return true; // Le compte est activé
     }
 }

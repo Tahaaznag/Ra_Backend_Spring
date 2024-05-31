@@ -1,6 +1,5 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -9,34 +8,25 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "\"Enrollement\"")
+@Table(name = "Enrollement") // Pas besoin des guillemets autour de Enrollement
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 public class Enrollement {
-//    @EmbeddedId
-//    @ManyToOne
-//    @MapsId("userId")
-//    @JoinColumn(name = "user_id")
-//    private UserRa user;
-
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long enrollementId; // Changer le nom de l'Id pour être cohérent
 
     @ManyToOne
-    @JoinColumn(name = "User_Id", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id") // Changer le nom de la colonne pour correspondre à UserRa
     private UserRa user;
 
     @ManyToOne
-    @JoinColumn(name = "Session_Id", referencedColumnName = "sessionId")
+    @JoinColumn(name = "session_id") // Changer le nom de la colonne pour correspondre à SessionRa
     private SessionRa session;
 
     @ManyToOne
-    @JoinColumn(name = "Role_Id", referencedColumnName = "Role_Id")
+    @JoinColumn(name = "role_id") // Changer le nom de la colonne pour correspondre à Role
     private Role role;
-
-
 }
-
 

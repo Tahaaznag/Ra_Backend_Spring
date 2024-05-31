@@ -1,6 +1,6 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
-import com.bergerlevrault.Remoteassist.Dto.auth.Authentication;
+import com.bergerlevrault.Remoteassist.Dto.auth.AuthenticationRegister;
 import com.bergerlevrault.Remoteassist.Dto.auth.RegisterRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.TokenResponse;
 import com.bergerlevrault.Remoteassist.Service.AuthenticationService;
@@ -25,8 +25,8 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<TokenResponse> authenticate(@RequestBody Authentication request) {
-        return ResponseEntity.ok(authenticationService.authenticate((org.springframework.security.core.Authentication) request));
+    public ResponseEntity<TokenResponse> authenticate(@RequestBody AuthenticationRegister request) {
+        return ResponseEntity.ok(authenticationService.authenticate(request));
     }
 
     @GetMapping("/activate-account")

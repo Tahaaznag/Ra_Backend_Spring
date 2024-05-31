@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class Authentication {
+public class AuthenticationRegister {
     @Email(message = "Email is not well formatted")
     @NotEmpty(message = "Email is mandatory")
     @NotNull(message = "Email is mandatory")
