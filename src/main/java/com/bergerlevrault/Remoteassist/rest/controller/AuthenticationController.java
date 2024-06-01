@@ -1,8 +1,9 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
-import com.bergerlevrault.Remoteassist.Dto.auth.AuthenticationRegister;
+import com.bergerlevrault.Remoteassist.Dto.CustomEntityResponse;
+import com.bergerlevrault.Remoteassist.Dto.auth.LoginRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.RegisterRequest;
-import com.bergerlevrault.Remoteassist.Dto.auth.TokenResponse;
+import com.bergerlevrault.Remoteassist.Dto.auth.LoginResponse;
 import com.bergerlevrault.Remoteassist.Service.AuthenticationService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +26,9 @@ public class AuthenticationController {
     }
 
     @PostMapping("/authenticate")
-    public ResponseEntity<TokenResponse> authenticate(@RequestBody AuthenticationRegister request) {
-        return ResponseEntity.ok(authenticationService.authenticate(request));
+    public CustomEntityResponse<LoginResponse> authenticate(@RequestBody LoginRequest request) {
+        System.out.println("tyy");
+        return new CustomEntityResponse<>(authenticationService.authenticate(request));
     }
 
     @GetMapping("/activate-account")

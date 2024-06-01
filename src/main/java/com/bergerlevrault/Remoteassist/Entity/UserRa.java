@@ -21,7 +21,7 @@ import static jakarta.persistence.FetchType.EAGER;
 @Builder
 @Getter
 @Setter
-@Table(name = "UserRa") // Ne pas besoin des guillemets autour de UserRa
+@Table(name = "UserRa")
 @EntityListeners(AuditingEntityListener.class)
 public class UserRa implements UserDetails {
     @Id
@@ -30,6 +30,8 @@ public class UserRa implements UserDetails {
     private String nom;
     private String prenom;
     private String email;
+    @Getter
+    private String username;
     private String password;
     private Boolean isAdmin;
     @OneToMany(mappedBy = "user")
@@ -67,6 +69,6 @@ public class UserRa implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return true; // Le compte est activé
+        return true;
     }
 }

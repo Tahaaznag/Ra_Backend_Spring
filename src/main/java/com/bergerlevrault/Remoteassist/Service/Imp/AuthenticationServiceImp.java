@@ -1,25 +1,25 @@
 package com.bergerlevrault.Remoteassist.Service.Imp;
 
-import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
-import com.bergerlevrault.Remoteassist.Dto.auth.AuthenticationRegister;
+import com.bergerlevrault.Remoteassist.Dto.auth.LoginRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.RegisterRequest;
-import com.bergerlevrault.Remoteassist.Dto.auth.TokenResponse;
+import com.bergerlevrault.Remoteassist.Dto.auth.LoginResponse;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
+import com.bergerlevrault.Remoteassist.Exception.UserAlreadyFoundException;
 import com.bergerlevrault.Remoteassist.Repository.RoleRepo;
 import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
 import com.bergerlevrault.Remoteassist.Service.AuthenticationService;
 import com.bergerlevrault.Remoteassist.Service.JwtService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.MessagingException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class AuthenticationServiceImp implements AuthenticationService {
     private final RoleRepo roleRepo;
     private final UserRaRepo userRaRepo;
@@ -27,14 +27,6 @@ public class AuthenticationServiceImp implements AuthenticationService {
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
 
-
-    public AuthenticationServiceImp(RoleRepo roleRepo, UserRaRepo userRaRepo, JwtService jwtService, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
-        this.roleRepo = roleRepo;
-        this.userRaRepo = userRaRepo;
-        this.jwtService = jwtService;
-        this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
-    }
 
     @Override
     public void register(RegisterRequest request) throws MessagingException {
@@ -51,21 +43,32 @@ public class AuthenticationServiceImp implements AuthenticationService {
     }
 
     @Override
-    public TokenResponse authenticate(AuthenticationRegister request) {
-        var auth = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
-        var claims = new HashMap<String, Object>();
-        var user = ((UserRa) auth.getPrincipal());
-        //claims.put("fullName", user.getName());
-        var jwtToken = jwtService.generateToken(claims, (UserRa) auth.getPrincipal());
-        return TokenResponse.builder()
+    public LoginResponse authenticate(LoginRequest request) {
+        System.out.println("Method authenticate called");
+        try {
+            authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            request.getEmail(),
+                            request.getPassword()
+                    )
+            );
+        } catch (Exception e) {
+            System.out.println("Authentication failed: " + e.getMessage());
+            throw e;
+        }
+        Optional<UserRa> user = this.userRaRepo.findByEmail(request.getEmail());
+        if (user.isEmpty()) {
+            throw new UserAlreadyFoundException("This email is wrong, please try another one");
+        }
+        final String jwtToken = jwtService.generateToken(user.get());
+        return LoginResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
+
+
+
     @Override
     public void activateAccount(String token) throws MessagingException {
 
