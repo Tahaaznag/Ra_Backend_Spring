@@ -7,6 +7,7 @@ import {KeycloakService} from "./services/keycloak/keycloak.service";
 import { LoginComponent } from './pages/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
+import { TechnicienComponent } from './pages/technicien/technicien.component';
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -16,7 +17,8 @@ export function KcFactory(KcService : KeycloakService){
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    TechnicienComponent
   ],
   imports: [
     BrowserModule,
@@ -26,12 +28,12 @@ export function KcFactory(KcService : KeycloakService){
   ],
   providers: [
     HttpClient,
-    {
+   /* {
       provide: APP_INITIALIZER,
       deps:[KeycloakService],
       useFactory: KcFactory,
       multi: true
-    }
+    }*/
   ],
   bootstrap: [AppComponent]
 })

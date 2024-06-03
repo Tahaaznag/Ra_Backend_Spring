@@ -9,16 +9,19 @@ import {KeycloakService} from "../../services/keycloak/keycloak.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-  /*email: string = '';
+  ngOnInit(): void {
+  }
+ /* email: string = '';
   password: string = '';
-  errorMsg: Array<string> = [];*/
+  errorMsg: Array<string> = [];
+
 
   constructor(private router:Router , private keycloakService : KeycloakService) {
 
   }
 
 
-  /*login() {
+  login() {
     this.errorMsg = [];
     this.authService.authenticate({
       body:this.authRequest
@@ -41,10 +44,10 @@ export class LoginComponent implements OnInit{
   register() {
     this.router.navigate(['register'])
   }
-*/
+
   async ngOnInit(): Promise<void> {
     await this.keycloakService.init();
     await this.keycloakService.login();
-  }
+  }*/
 }
 

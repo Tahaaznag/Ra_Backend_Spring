@@ -45,6 +45,6 @@ export class KeycloakService {
   }
 
   logout(){
-    return this.Keycloak?.logout({redirectUri : 'http://localhost:42000'})
+    return this.Keycloak?.logout({redirectUri : 'http://localhost:4200'})
   }
 }
