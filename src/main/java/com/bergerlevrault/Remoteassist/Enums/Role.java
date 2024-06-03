@@ -1,7 +1,5 @@
 package com.bergerlevrault.Remoteassist.Enums;
 
 public enum Role {
-    USER,
-    ADMIN,
-    GUEST
+    EXPERT,TECHNCIEN,GUEST
 }

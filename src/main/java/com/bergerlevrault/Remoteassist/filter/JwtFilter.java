@@ -1,6 +1,7 @@
 package com.bergerlevrault.Remoteassist.filter;
 
 import com.bergerlevrault.Remoteassist.Service.JwtService;
+import io.micrometer.common.lang.NonNull;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -29,13 +30,16 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
-            throws ServletException, IOException {
-        if (request.getServletPath().contains("/auth/")) {
+    protected void doFilterInternal(
+            @NonNull HttpServletRequest request,
+            @NonNull HttpServletResponse response,
+            @NonNull FilterChain filterChain
+    ) throws ServletException, IOException {
+        if (request.getServletPath().contains("/auth")) {
             filterChain.doFilter(request, response);
             return;
         }
-        final String authHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
+        final String authHeader = request.getHeader("Authorization");
         final String jwt;
         final String userEmail;
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
@@ -45,12 +49,16 @@ public class JwtFilter extends OncePerRequestFilter {
         jwt = authHeader.substring(7);
         userEmail = jwtService.extractUsername(jwt);
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(userEmail);
+            UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
+                        userDetails,
+                        null,
+                        userDetails.getAuthorities()
                 );
-                authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                authToken.setDetails(
+                        new WebAuthenticationDetailsSource().buildDetails(request)
+                );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
             }
         }

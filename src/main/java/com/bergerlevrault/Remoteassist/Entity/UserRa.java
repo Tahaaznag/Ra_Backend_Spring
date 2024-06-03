@@ -1,5 +1,7 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
+
+import com.bergerlevrault.Remoteassist.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -8,12 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import static jakarta.persistence.FetchType.EAGER;
 
 @Entity
 @AllArgsConstructor
@@ -30,26 +29,16 @@ public class UserRa implements UserDetails {
     private String nom;
     private String prenom;
     private String email;
-    @Getter
     private String username;
     private String password;
     private Boolean isAdmin;
-    @OneToMany(mappedBy = "user")
-    private Set<Enrollement> enrollements;
-    @ManyToMany(fetch = EAGER)
-    private List<Role> roles;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return this.roles
-                .stream()
-                .map(r -> new SimpleGrantedAuthority(r.getName()))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public String getUsername() {
-        return getUsername();
+        return List.of(new SimpleGrantedAuthority(role.name()));
     }
 
     @Override

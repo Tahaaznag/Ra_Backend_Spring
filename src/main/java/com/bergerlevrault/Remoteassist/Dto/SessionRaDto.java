@@ -28,9 +28,6 @@ public class SessionRaDto {
 
     private Set<ChatDto> chats;
 
-    private Set<EnrollementDto> enrollements;
-
-    private Set<EnrollementDto> attendee;
 
 
 }

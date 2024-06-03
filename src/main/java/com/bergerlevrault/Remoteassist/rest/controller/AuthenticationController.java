@@ -1,6 +1,5 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
-import com.bergerlevrault.Remoteassist.Dto.CustomEntityResponse;
 import com.bergerlevrault.Remoteassist.Dto.auth.LoginRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.RegisterRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.LoginResponse;
@@ -18,17 +17,20 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     private final AuthenticationService authenticationService;
 
+
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public ResponseEntity<?> register(@RequestBody @Valid RegisterRequest request) throws MessagingException {
-        authenticationService.register(request);
-        return ResponseEntity.accepted().build();
+    public ResponseEntity<LoginResponse> register(@RequestBody @Valid RegisterRequest request) throws MessagingException {
+        LoginResponse loginResponse = authenticationService.register(request);
+        return ResponseEntity.accepted().body(loginResponse);
     }
 
     @PostMapping("/authenticate")
-    public CustomEntityResponse<LoginResponse> authenticate(@RequestBody LoginRequest request) {
-        System.out.println("tyy");
-        return new CustomEntityResponse<>(authenticationService.authenticate(request));
+    public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid LoginRequest request) {
+        System.out.println("test 1");
+        LoginResponse response = authenticationService.authenticate(request);
+        System.out.println("test 2");
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/activate-account")

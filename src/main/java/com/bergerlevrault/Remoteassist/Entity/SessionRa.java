@@ -34,11 +34,7 @@ public class SessionRa {
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
 
-    @OneToMany(mappedBy = "session")
-    private Set<Enrollement> enrollements;
 
-    @OneToMany(mappedBy = "session")
-    private Set<Enrollement> attendees;
 
     public boolean isActive() {
         Date now = new Date();

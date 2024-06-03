@@ -22,28 +22,19 @@ import java.util.ArrayList;
 public class BeansConfig {
 
     private final UserRaRepo userRaRepo;
+    private final UserDetailsService userDetailsService;
 
     @Bean
-    public UserDetailsService userDetailsService() {
-        return username -> {
-            UserRa user = userRaRepo.findByEmail(username)
-                    .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-            // Assuming User implements UserDetails
-            return (UserDetails) user;
-        };
-    }
-
-    @Bean
-    public AuthenticationProvider authentificationProvider(){
+    public AuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setUserDetailsService(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
-
     @Bean
-    public AuthenticationManager autheticationManager(AuthenticationConfiguration configuration) throws Exception {
-        return configuration.getAuthenticationManager();
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

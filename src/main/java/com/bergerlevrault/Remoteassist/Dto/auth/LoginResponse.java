@@ -1,5 +1,6 @@
 package com.bergerlevrault.Remoteassist.Dto.auth;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,5 +9,5 @@ import lombok.Setter;
 @Setter
 @Builder
 public class LoginResponse {
-    private String token;
+ private String token;
 }
