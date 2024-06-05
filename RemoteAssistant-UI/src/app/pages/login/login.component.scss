@@ -1,8 +1,10 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
+  justify-content: flex-start; /* Alignement à gauche */
+  height: 90vh;
+  padding-left: 0rem;
+  padding-top: 5vh;
 }
 
 .login-form {
@@ -24,33 +26,64 @@
   margin-bottom: 20px;
 }
 
-.form-control{
-  width: 60%;
-  font-size: 15px;
-  height: 50px;
-  border: 2px solid #8c9dab;
-  transition: all .2s linear;
-}
 .titre {
-  margin-bottom: 70px; /* ou toute autre valeur qui convient à votre mise en page */
+  margin-bottom: 45px;
+  font-size: 36px;
+  font-weight: 600;
+  color: #132d48;
+
 }
 
 .login-image {
-  position: relative; /* Permet d'utiliser une position absolue pour les éléments enfants */
+  position: fixed;
+  right: 0;
+  top: 0;
+  height: 100vh;
+  width: 50%;
 }
-
+.form-label {
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 12px;
+  color: #2d2d2d;
+  line-height:18px;
+}
 .image-overlay {
   position: absolute;
-  top: 8%; /* Positionne le haut de la div à 50% du parent */
-  left: 50%; /* Positionne la gauche de la div à 50% du parent */
-  font-size: 22px;
-  font-weight: 600;
-  transform: translate(-50%, -50%); /* Centre la div horizontalement et verticalement */
-  text-align: center; /* Centre le texte à l'intérieur de la div */
-  color: #132d48; /* Couleur du texte */
-  margin-bottom: 30px;
+  left: 26rem;
+  top: 15%;
+  transform: translateY(-50%);
 }
 
-.image-overlay h2, .image-overlay p {
-  margin: 0; /* Supprime les marges par défaut */
+.logo {
+  height: auto;
+  width: 11rem;
+}
+.image-overlay2{
+  margin-top: 20px;
+}
+.form-control{
+  width: 70%;
+  font-size: 15px;
+  height: 60px;
+  border: 2px solid #8c9dab;
+  transition: all .2s linear;
+}
+
+.form-group.text-right {
+  display: flex;
+  justify-content: center; /* Align items to the right */
+  margin-top: 20px; /* Adjust the margin as needed */
+  margin-right: 12rem;
+}
+
+.rm-green_button{
+  width: 70%;
+  font-size: 15px;
+  height: 60px;
+  transition: all .2s linear;
+  margin-top: 20px;
+  color: white;
+  background-color: #132d48;
+  border-radius: 10px;
 }

@@ -1,24 +1,30 @@
 <div class="container">
-  <div class="login-form">
-    <h2 class="titre">Se connecter</h2>
-    <form (ngSubmit)="login()" #loginForm="ngForm">
-      <div class="form-group">
-        <!-- EMAIL -->
-        <label for="email">Adresse E-mail</label>
-        <input type="email" class="form-control" id="email" name="email" placeholder="Saisissez votre adresse mail" [(ngModel)]="email" required>
+  <div class="container">
+    <div class="login-form">
+      <div class="image-overlay">
+        <img src="assets/groupBl.png" alt="" class="logo">
       </div>
-      <!-- PASSWORD -->
-      <div class="form-group">
-        <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password" required>
-      </div>
-      <button type="submit" class="btn btn-primary">Se connecter</button>
-    </form>
+      <h2 class="titre">Se connecter</h2>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <div class="form-group">
+          <!-- EMAIL -->
+          <label for="email" class="form-label">Adresse E-mail</label>
+          <input type="email" class="form-control" id="email" name="email" placeholder="Saisissez votre adresse mail" [(ngModel)]="email" required>
+        </div>
+        <!-- PASSWORD -->
+        <div class="form-group">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input type="password" class="form-control" id="password" name="password" placeholder="Entrez votre mot de passe" [(ngModel)]="password" required>
+        </div>
+        <button type="submit" class="rm-green_button" [disabled]="!email || !password">Se connecter</button>
+      </form>
+    </div>
   </div>
-  <div class="login-image">
-    <img src="assets/f6e9885adfc4c5eebbc6ca45d7d0651d.jpg" alt="">
-    <div class="image-overlay">
-      <h2>Plateforme Pour le Remote Assistant</h2>
+
+  <div class="login-image-container">
+    <div class="login-image">
+      <img src="assets/f6e9885adfc4c5eebbc6ca45d7d0651d.jpg" alt="">
+      <h2>Hello</h2>
     </div>
   </div>
 </div>
