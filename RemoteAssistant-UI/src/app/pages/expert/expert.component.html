@@ -1,0 +1,84 @@
+<!-- your-component.component.html -->
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark-blue">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/groupBl.png" style="height: 30px; margin-right: 10px;">
+      Remote Assistant
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <form class="d-flex ms-auto">
+        <button class="btn btn-primary btn-no-bg me-2" type="button" (click)="toggleStar()">
+          <i class="fas fa-star"></i>
+        </button>
+        <button class="btn btn-primary btn-no-bg me-2" type="button" (click)="toggleNotification()">
+          <i class="fas fa-bell"></i>
+        </button>
+        <button class="btn btn-primary btn-no-bg me-2" type="button" (click)="toggleSearch()">
+          <i class="fas fa-search"></i>
+        </button>
+        <div *ngIf="showSearch" class="input-group">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary" type="submit">Submit</button>
+        </div>
+      </form>
+      <div *ngIf="showNotification" class="notification-list">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">No notifications</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+
+<div class="container">
+  <div class="sidebar" [ngClass]="{'show': showSidebar}">
+    <button class="btn btn-primary btn-no-bg sidebar-toggle" (click)="toggleSidebar()">
+      <i class="fas fa-bars"></i>
+    </button>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+          <i class="fa-solid fa-house me-3"></i> Accueil
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="#" class="text-decoration-none d-flex align-items-center mb-3 text-black" (click)="toggleMonEspace($event)">
+          <i class="fa-solid fa-user me-3"></i> Mon espace
+          <i class="fa-solid ms-auto" [ngClass]="{'fa-chevron-down': !showMonEspace, 'fa-chevron-up': showMonEspace}"></i>
+        </a>
+        <ul class="list-group nested-list mb-3" [ngClass]="{'d-none': !showMonEspace}">
+          <li class="list-group-item">
+            <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+              <i class="fa-solid fa-id-badge me-3 text-black"></i> Profil
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+              <i class="fa-solid fa-cog me-3"></i> Paramètres
+            </a>
+          </li>
+          <li class="list-group-item">
+            <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+              <i class="fa-solid fa-circle-play me-3"></i> Planning
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="list-group-item">
+        <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+          <i class="fa-solid fa-people-group me-3"></i> Mon équipe
+        </a>
+      </li>
+      <li class="list-group-item">
+        <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+          <i class="fa-solid fa-right-from-bracket me-3"></i> Logout
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

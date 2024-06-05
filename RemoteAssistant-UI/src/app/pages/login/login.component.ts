@@ -9,8 +9,12 @@ import {KeycloakService} from "../../services/keycloak/keycloak.service";
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
+  email: string = "";
+
   ngOnInit(): void {
   }
+
+
  /* email: string = '';
   password: string = '';
   errorMsg: Array<string> = [];
@@ -49,5 +53,10 @@ export class LoginComponent implements OnInit{
     await this.keycloakService.init();
     await this.keycloakService.login();
   }*/
+  password: string = "";
+  login() {
+    console.log('Email : ', this.email);
+    console.log('Mot de passe : ', this.password);
+  }
 }
 

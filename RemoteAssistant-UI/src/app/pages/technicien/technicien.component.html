@@ -33,36 +33,83 @@
     <div class="col-lg-3">
       <div class="card">
         <div class="card-body">
-          <!-- Mettez ici le contenu de votre menu -->
-          <!-- Par exemple, vous pouvez ajouter des boutons de navigation -->
-          <button class="btn btn-primary btn-no-bg mb-2" type="button" (click)="toggleStar()">
-            <i class="fas fa-star"></i> Star
-          </button>
-          <button class="btn btn-primary btn-no-bg mb-2" type="button" (click)="toggleNotification()">
-            <i class="fas fa-bell"></i> Notification
-          </button>
-          <button class="btn btn-primary btn-no-bg mb-2" type="button" (click)="toggleSearch()">
-            <i class="fas fa-search"></i> Search
-          </button>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                <i class="fa-solid fa-house me-3"></i> Accueil
+              </a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="text-decoration-none d-flex align-items-center mb-3 text-black" (click)="toggleMonEspace($event)">
+                <i class="fa-solid fa-user me-3 "></i> Mon espace
+                <i class="fa-solid ms-auto" [ngClass]="{'fa-chevron-down': !showMonEspace, 'fa-chevron-up': showMonEspace}"></i>
+              </a>
+              <ul class="list-group nested-list mb-3" [ngClass]="{'d-none': !showMonEspace}">
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                    <i class="fa-solid fa-id-badge me-3 text-black"></i> Profil
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                    <i class="fa-solid fa-cog me-3"></i>Paramètres
+                  </a>
+                </li>
+                <li class="list-group-item">
+                  <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                    <i class="fa-solid fa-circle-play me-3"></i>  Planning
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                <i class="fa-solid fa-people-group me-3"></i> Mon équipe
+              </a>
+            </li>
+            <li class="list-group-item">
+              <a href="#" class="text-decoration-none d-flex align-items-center text-black">
+                <i class="fa-solid fa-right-from-bracket me-3"></i> Logout
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <!-- Colonne pour le grand formulaire au centre -->
+
+    <!-- Colonne pour le formulaire à droite -->
     <div class="col-lg-9">
-      <form>
-        <!-- Mettez ici le contenu de votre grand formulaire -->
-        <div class="mb-3">
-          <label for="exampleFormControlInput1" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+      <div class="row">
+        <div class="col">
+          <form>
+            <!-- Contenu de votre formulaire -->
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Id : </label>
+              <input type="id" class="form-control" id="exampleFormControlInput1" placeholder="11247">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlTextarea1" class="form-label">Nom</label>
+              <input class="form-control" id="exampleFormControlTextarea1" placeholder="Stephan">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Nom Session : </label>
+              <input type="email" class="form-control" id="exampleFormControlInput2" placeholder="Correction Bug">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Date Début : </label>
+              <input type="date" class="form-control" id="exampleFormControlInput3" placeholder="06/20/2024">
+            </div>
+            <div class="mb-3">
+              <label for="exampleFormControlInput1" class="form-label">Date Fin : </label>
+              <input type="date" class="form-control" id="exampleFormControlInput4" placeholder="20/10/2024">
+            </div>
+            <div class="form-group text-right">
+              <button type="submit" class="btn custom-btn">Submit</button>
+            </div>
+          </form>
         </div>
-        <div class="mb-3">
-          <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
+      </div>
     </div>
   </div>
 </div>
-

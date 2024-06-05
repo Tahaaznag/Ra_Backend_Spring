@@ -9,6 +9,7 @@ export class TechnicienComponent {
   buttonsNav: any;
   showSearch: boolean = false;
   private notificationModal: any;
+  showMonEspace: boolean = false;
   private any: any;
 
   // @ts-ignore
@@ -22,5 +23,13 @@ export class TechnicienComponent {
 
   toggleStar() {
     console.log("Star button clicked!");
+  }
+
+  logout() {
+
+  }
+  toggleMonEspace(event: Event): void {
+    event.preventDefault();
+    this.showMonEspace = !this.showMonEspace;
   }
 }

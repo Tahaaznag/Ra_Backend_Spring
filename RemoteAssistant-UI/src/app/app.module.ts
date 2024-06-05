@@ -8,6 +8,8 @@ import { LoginComponent } from './pages/login/login.component';
 import {FormsModule} from "@angular/forms";
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { TechnicienComponent } from './pages/technicien/technicien.component';
+import { ExpertComponent } from './pages/expert/expert.component';
+import { SignupComponent } from './pages/signup/signup.component';
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -18,7 +20,9 @@ export function KcFactory(KcService : KeycloakService){
   declarations: [
     AppComponent,
     LoginComponent,
-    TechnicienComponent
+    TechnicienComponent,
+    ExpertComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
