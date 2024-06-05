@@ -10,6 +10,8 @@ import {KeycloakService} from "../../services/keycloak/keycloak.service";
 })
 export class LoginComponent implements OnInit{
   email: string = "";
+  passwordVisible: boolean = false;
+
 
   ngOnInit(): void {
   }
@@ -58,5 +60,18 @@ export class LoginComponent implements OnInit{
     console.log('Email : ', this.email);
     console.log('Mot de passe : ', this.password);
   }
+
+  isFormValid() {
+    return this.email !== '' && this.password !== '';
+  }
+
+  togglePasswordVisibility() {
+    this.passwordVisible = !this.passwordVisible;
+    const input = document.getElementById('password');
+    if (input) {
+      input.setAttribute('type', this.passwordVisible ? 'text' : 'password');
+    }
+  }
 }
+
 
