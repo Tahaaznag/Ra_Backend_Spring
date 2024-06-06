@@ -62,6 +62,7 @@ export class LoginComponent implements OnInit{
   }
 
   isFormValid() {
+    console.log("test1");
     return this.email !== '' && this.password !== '';
   }
 
