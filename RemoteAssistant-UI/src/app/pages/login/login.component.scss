@@ -78,15 +78,9 @@
   margin-right: 12rem;
 }
 
-.rm-green_button{
-  width: 70%;
-  font-size: 15px;
-  height: 60px;
-  transition: all .2s linear;
-  margin-top: 20px;
-  color: white;
-  background-color: #132d48;
-  border-radius: 10px;
+
+.button-disabled {
+  background-color: grey;
 }
 .input-group {
   position: relative;
@@ -112,8 +106,9 @@
   font-size: 15px;
   height: 60px;
   border: 2px solid #8c9dab;
-  transition: all .2s linear;
-  padding-right: 20px; /* Ajoute un espace à droite de l'input */
+  transition: all .10s linear;
+  padding-left: 10px;
+  border-radius: 7px;
 }
 
 .form-label2 {
@@ -144,6 +139,40 @@
   margin-right: 12rem;
 }
 
-.form-control2::placeholder {
-  padding-right: 20px !important;
+.button-enabled {
+  background-color: #132d48;
+}
+
+
+.rm-green_button {
+  width: 70%;
+  height: 60px;
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  max-width: unset;
+  font-family: 'Inter', Arial, Helvetica, sans-serif;
+  font-weight: 500;
+  font-size: 15px;
+  border: 2px solid #8c9dab;
+  margin-top: 15px;
+  border-radius: 7px;
+}
+
+.forgot-password-link {
+  font-weight: 650;
+  margin-top: 22px;
+  text-align: center;
+  margin-left: 110px;
+}
+
+.forgot-password-link a {
+  color: #132d48; /* Changez la couleur selon votre besoin */
+  text-decoration: none;
+  max-width: 280px;
+  border-radius: 9px;
+}
+
+.forgot-password-link a:hover {
+  text-decoration: none;
 }

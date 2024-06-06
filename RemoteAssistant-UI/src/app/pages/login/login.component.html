@@ -9,7 +9,16 @@
         <div class="form-group">
           <!-- EMAIL -->
           <label for="email" class="form-label">Adresse E-mail</label>
-          <input type="email" class="form-control" id="email" name="email" placeholder="Saisissez votre adresse mail" [(ngModel)]="email" required>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            name="email"
+            placeholder="Saisissez votre adresse mail"
+            [(ngModel)]="email"
+            required
+            (input)="checkFormValidity()"
+          />
         </div>
         <!-- PASSWORD -->
         <div class="form-group2">
@@ -20,9 +29,10 @@
               class="form-control2"
               id="password"
               name="password"
-              placeholder="  Entrez votre mot de passe"
+              placeholder="Entrez votre mot de passe"
               [(ngModel)]="password"
               required
+              (input)="checkFormValidity()"
             />
             <button
               class="btn toggle-password"
@@ -34,7 +44,17 @@
           </div>
         </div>
 
-        <button type="submit" class="rm-green_button" [disabled]="!isFormValid()">Se connecter</button>
+        <button
+          type="submit"
+          class="rm-green_button"
+          [disabled]="!isFormValid()"
+          [ngClass]="{'button-disabled': !isFormValid(), 'button-enabled': isFormValid()}">
+          Se connecter
+        </button>
+
+        <div class="forgot-password-link">
+          <a href="/forgot-password">Mot de passe oublié ?</a>
+        </div>
       </form>
     </div>
   </div>
@@ -42,7 +62,6 @@
   <div class="login-image-container">
     <div class="login-image">
       <img src="assets/f6e9885adfc4c5eebbc6ca45d7d0651d.jpg" alt="">
-      <h2>Hello</h2>
     </div>
   </div>
 </div>
