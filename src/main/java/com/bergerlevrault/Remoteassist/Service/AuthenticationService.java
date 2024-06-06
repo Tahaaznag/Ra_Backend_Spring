@@ -32,20 +32,22 @@ public class AuthenticationService {
     public LoginResponse register(RegisterRequest registerRequest) throws MessagingException {
         Optional<UserRa> oldUser = this.userRaRepo.findByEmail(registerRequest.email());
         if(oldUser.isPresent()) throw new UserAlreadyFoundException("This email is already taken, please try another one");
-        var user= UserRa
-                .builder()
+
+        var user = UserRa.builder()
                 .nom(registerRequest.name())
                 .prenom(registerRequest.prenom())
                 .email(registerRequest.email())
                 .password(passwordEncoder.encode(registerRequest.password()))
-                .role(Role.EXPERT)
+                .role(registerRequest.role())
                 .build();
+
         this.userRaRepo.save(user);
-        var jwtToken=this.jwtService.generateToken(user);
+        var jwtToken = this.jwtService.generateToken(user);
         return LoginResponse.builder()
                 .token(jwtToken)
                 .build();
     }
+
 
 
     public LoginResponse authenticate(LoginRequest request) {

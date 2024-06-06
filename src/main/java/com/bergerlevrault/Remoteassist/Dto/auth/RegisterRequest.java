@@ -1,5 +1,6 @@
 package com.bergerlevrault.Remoteassist.Dto.auth;
 
+import com.bergerlevrault.Remoteassist.Enums.Role;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ public record RegisterRequest (
         String name,
         String prenom,
         String email,
-        String password
+        String password,
+        Role role
 ){
 }

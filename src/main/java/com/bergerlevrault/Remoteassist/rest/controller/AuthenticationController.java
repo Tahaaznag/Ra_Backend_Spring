@@ -25,6 +25,7 @@ public class AuthenticationController {
         return ResponseEntity.accepted().body(loginResponse);
     }
 
+
     @PostMapping("/authenticate")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid LoginRequest request) {
         System.out.println("test 1");

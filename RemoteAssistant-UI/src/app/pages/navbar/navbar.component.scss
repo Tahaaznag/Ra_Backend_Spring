@@ -31,3 +31,6 @@
 .nav-item{
   margin-left: 20px;
 }
+.btn {
+  transition: background-color 1s ease, color 1s ease; /* Ajoutez une transition pour la couleur de fond et la couleur du texte */
+}

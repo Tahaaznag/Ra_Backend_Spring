@@ -40,11 +40,11 @@ div {
 }
 
 image-cover {
-  width: 30vw; /* 30% de la largeur de la vue */
+  width: 40vw; /* 30% de la largeur de la vue */
   max-width: 150px; /* Limite maximale de la taille de l'image */
   height: auto; /* Hauteur automatique pour conserver le ratio */
   overflow: hidden; /* Assurez-vous que l'image ne dépasse pas les limites du conteneur */
-  margin-left: 100px; /* Déplace le conteneur de l'image vers la droite */
+  margin-left: 200px; /* Déplace le conteneur de l'image vers la droite */
 }
 .responsive-image {
   width: 100%; /* Ajuste la largeur de l'image pour qu'elle remplisse le conteneur */
@@ -59,7 +59,7 @@ image-cover {
   }
 }
 .text-container {
-  margin-left: 30px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+  margin-left: 20px; /* Vous pouvez ajuster cette valeur selon vos besoins */
 }
 
 #home {
@@ -71,4 +71,11 @@ image-cover {
 .image-cover img {
   max-width: 110%;
   height: auto;
+}
+h2.extraBold.font40 {
+  margin-bottom: 0; /* Enlève la marge inférieure pour coller le texte suivant */
+}
+.sc-brSaZW.lcejaQ.MontserratM.header {
+  margin-top: 0; /* Enlève la marge supérieure pour coller au texte précédent */
+  padding-top: 5px; /* Vous pouvez ajuster cette valeur pour donner un peu d'espace si nécessaire */
 }
