@@ -10,6 +10,9 @@ import {HttpClient, HttpClientModule} from "@angular/common/http";
 import { TechnicienComponent } from './pages/technicien/technicien.component';
 import { ExpertComponent } from './pages/expert/expert.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { HomeComponent } from './pages/home/home.component';
+import { NavbarComponent } from './pages/navbar/navbar.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -22,7 +25,10 @@ export function KcFactory(KcService : KeycloakService){
     LoginComponent,
     TechnicienComponent,
     ExpertComponent,
-    SignupComponent
+    SignupComponent,
+    HomeComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,

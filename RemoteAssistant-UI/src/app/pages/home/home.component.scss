@@ -1,0 +1,74 @@
+.extraBold {
+  text-align: left;
+  color: rgb(33, 37, 41);
+  margin-bottom: 90px;
+  font-weight: 800!important;
+  margin-right: 20rem;
+}
+
+span.welcome-text {
+  font-size: 60px;
+  font-weight: bold;
+  color:#2b5f96;
+
+}
+h2{
+  font-weight: lighter;
+  margin-bottom: 1rem;
+  padding-right: 30px;
+  text-align: center;
+  font-size: 130px;
+  color: #2b5f96;
+}
+
+div {
+  display: block;
+}
+.container {
+  width: 100%;
+}
+#home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Cela assure que la section prend toute la hauteur de la vue */
+}
+.header{
+  color: #41bac9;
+  font-size: 30px;
+  margin-left: 100px;
+}
+
+image-cover {
+  width: 30vw; /* 30% de la largeur de la vue */
+  max-width: 150px; /* Limite maximale de la taille de l'image */
+  height: auto; /* Hauteur automatique pour conserver le ratio */
+  overflow: hidden; /* Assurez-vous que l'image ne dépasse pas les limites du conteneur */
+  margin-left: 100px; /* Déplace le conteneur de l'image vers la droite */
+}
+.responsive-image {
+  width: 100%; /* Ajuste la largeur de l'image pour qu'elle remplisse le conteneur */
+  height: auto; /* Maintient le ratio de l'image */
+}
+
+/* Media query pour les petits écrans */
+@media (max-width: 768px) {
+  .image-cover {
+    width: 50vw; /* 50% de la largeur de la vue pour les petits écrans */
+    max-width: 100px; /* Limite maximale de la taille de l'image pour les petits écrans */
+  }
+}
+.text-container {
+  margin-left: 30px; /* Vous pouvez ajuster cette valeur selon vos besoins */
+}
+
+#home {
+  display: flex;
+  justify-content: space-between; /* Assure que les éléments sont espacés uniformément */
+  align-items: center; /* Centre les éléments verticalement */
+}
+
+.image-cover img {
+  max-width: 110%;
+  height: auto;
+}
