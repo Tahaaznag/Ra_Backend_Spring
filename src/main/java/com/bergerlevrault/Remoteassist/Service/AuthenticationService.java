@@ -3,9 +3,11 @@ package com.bergerlevrault.Remoteassist.Service;
 import com.bergerlevrault.Remoteassist.Dto.auth.LoginRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.RegisterRequest;
 import com.bergerlevrault.Remoteassist.Dto.auth.LoginResponse;
+import com.bergerlevrault.Remoteassist.Entity.Token;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Exception.UserAlreadyFoundException;
 import com.bergerlevrault.Remoteassist.Repository.RoleRepo;
+import com.bergerlevrault.Remoteassist.Repository.TokenRepo;
 import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
 import lombok.RequiredArgsConstructor;
 import com.bergerlevrault.Remoteassist.Enums.Role;
@@ -26,12 +28,12 @@ public class AuthenticationService {
     private final JwtService jwtService;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-
+    private final TokenRepo tokenRepo;
 
 
     public LoginResponse register(RegisterRequest registerRequest) throws MessagingException {
-        Optional<UserRa> oldUser = this.userRaRepo.findByEmail(registerRequest.email());
-        if(oldUser.isPresent()) throw new UserAlreadyFoundException("This email is already taken, please try another one");
+        Optional<UserRa> oldUser = userRaRepo.findByEmail(registerRequest.email());
+        if (oldUser.isPresent()) throw new UserAlreadyFoundException("This email is already taken, please try another one");
 
         var user = UserRa.builder()
                 .nom(registerRequest.name())
@@ -41,14 +43,18 @@ public class AuthenticationService {
                 .role(registerRequest.role())
                 .build();
 
-        this.userRaRepo.save(user);
-        var jwtToken = this.jwtService.generateToken(user);
+        userRaRepo.save(user);
+        var jwtToken = jwtService.generateToken(user);
+        com.bergerlevrault.Remoteassist.Entity.Token token = Token.builder()
+                .token(jwtToken)
+                .user(user)
+                .build();
+        tokenRepo.save(token);
+
         return LoginResponse.builder()
                 .token(jwtToken)
                 .build();
     }
-
-
 
     public LoginResponse authenticate(LoginRequest request) {
         try {

@@ -1,8 +1,6 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,4 +16,8 @@ public class Token {
     @GeneratedValue
     private Long id;
     private String token;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserRa user;
 }
