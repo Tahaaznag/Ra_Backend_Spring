@@ -9,7 +9,7 @@ services:
       - "3308:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: RemoteAssist
+      MYSQL_DATABASE: user
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     volumes:
@@ -28,7 +28,7 @@ services:
       - mysql
 
   swagger:
-    image: swaggerapi/swagger-ui
+    image: swaggerapi/swagger-uicld
     ports:
       - "8080:8080"
     environment:
