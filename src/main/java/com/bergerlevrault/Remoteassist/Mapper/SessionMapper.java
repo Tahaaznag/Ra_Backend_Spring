@@ -3,7 +3,6 @@ package com.bergerlevrault.Remoteassist.Mapper;
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
 import com.bergerlevrault.Remoteassist.Entity.SessionRa;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 import java.util.List;
 

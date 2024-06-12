@@ -2,6 +2,7 @@ package com.bergerlevrault.Remoteassist.Service.Imp;
 
 import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
+import com.bergerlevrault.Remoteassist.Enums.Status;
 import com.bergerlevrault.Remoteassist.Mapper.UserMapper;
 import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
 import com.bergerlevrault.Remoteassist.Service.UserRaService;
@@ -57,5 +58,26 @@ public class UserRaServiceImp implements UserRaService {
     @Override
     public void deleteUser(Long id) {
         userRaRepo.deleteById(id);
+    }
+
+    @Override
+    public void saveUSer(UserRa user) {
+        user.setStatus(Status.ONLINE);
+        userRaRepo.save(user);
+    }
+
+    @Override
+    public void disconnect(UserRaDto user) {
+        var storedUSer = userRaRepo.findById(Long.valueOf(user.getNom()))
+                .orElse(null);
+        if (storedUSer != null) {
+            storedUSer.setStatus(Status.OFFLINE);
+            userRaRepo.save(storedUSer);
+        }
+    }
+
+    @Override
+    public List<UserRa> findConnectUser() {
+        return userRaRepo.findAllByStatus(Status.ONLINE);
     }
 }

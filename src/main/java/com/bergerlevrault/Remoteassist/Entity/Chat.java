@@ -2,6 +2,7 @@ package com.bergerlevrault.Remoteassist.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.lang.annotation.Documented;
 import java.sql.Timestamp;
 import java.util.Date;
 
@@ -14,15 +15,24 @@ import java.util.Date;
 @Setter
 public class Chat {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Chat_id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @Column(name = "chatId")
+    private String chatId;
+
     @ManyToOne
-    @JoinColumn(name = "session_id")
+    @JoinColumn(name = "sessionId")
     private SessionRa session;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private UserRa user;
-    private Timestamp Chat_Date;
-    private String Message;
 
+    private Timestamp chatDate;
+
+    private String senderId;
+    private String recipientId;
+    private String message;
+    private String content;
 }

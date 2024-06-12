@@ -5,6 +5,9 @@ import {TechnicienComponent} from "./pages/technicien/technicien.component";
 import {ExpertComponent} from "./pages/expert/expert.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {SignupComponent} from "./pages/signup/signup.component";
+import {ForgetComponent} from "./pages/forget/forget.component";
+import {MessagingComponent} from "./pages/messaging/messaging.component";
+import {VideoCallComponent} from "./pages/video-call/video-call.component";
 
 const routes: Routes = [
   {
@@ -26,6 +29,18 @@ const routes: Routes = [
   {
     path: "signup",
     component:SignupComponent
+  },
+  {
+    path:"forgot-password",
+    component:ForgetComponent
+  },
+  {
+    path:"messaging",
+    component:MessagingComponent
+  },
+  {
+    path:"video-call",
+    component:VideoCallComponent
   }
 ];
 

@@ -13,21 +13,16 @@ import java.util.Set;
 @Data
 public class SessionRaDto {
 
-
-    private Long sessionId;
-
+    private String sessionId;
     private String sessionName;
 
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateDebut;
-
-    @Temporal(TemporalType.TIMESTAMP)
     private Date dateFin;
 
     private UserRaDto user;
-
     private Set<ChatDto> chats;
 
-
+    private String senderId;
+    private String recipientId;
 
 }

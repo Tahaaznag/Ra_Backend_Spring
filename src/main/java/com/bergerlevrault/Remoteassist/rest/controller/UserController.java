@@ -1,10 +1,14 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
 import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
+import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Service.Imp.UserRaServiceImp;
 import com.bergerlevrault.Remoteassist.utils.ResourcesPath;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.Payload;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +31,24 @@ public class UserController {
         return new ResponseEntity<>(ajouteruser, HttpStatus.OK);
     }
 
+    @MessageMapping("/user.addUser")
+    @SendTo("/user/topic")
+    public UserRa addUser(UserRa userRaDto){
+        userRaService.saveUSer(userRaDto);
+        return userRaDto;
+    }
+
+    @MessageMapping("/user.disconnectUser")
+    @SendTo("/user/topic")
+    public UserRaDto disconnect(@Payload UserRaDto userRaDto){
+        userRaService.disconnect(userRaDto);
+        return userRaDto;
+    }
+
+    @GetMapping("/userConnecting")
+    public ResponseEntity<List<UserRa>> findConnectUser(){
+        return ResponseEntity.ok(userRaService.findConnectUser());
+    }
 
     @GetMapping(ResourcesPath.ALLUSERS)
     public ResponseEntity<List<UserRaDto>> getAllUsers() {

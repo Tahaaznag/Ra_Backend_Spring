@@ -13,10 +13,12 @@ import java.sql.Timestamp;
 @Setter
 public class ChatDto {
 
-    private Long Chat_id;
+    private String ChatID;
     private SessionRa session;
     private UserRa user;
     private Timestamp Chat_Date;
     private String Message;
-
+    private String senderID;
+    private String recipientID;
+    private String content;
 }

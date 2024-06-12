@@ -17,7 +17,7 @@ public class SessionRa {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long sessionId;
+    private String sessionId;
 
     private String sessionName;
 
@@ -34,7 +34,9 @@ public class SessionRa {
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
 
+    private String senderId;
 
+    private String recipientId;
 
     public boolean isActive() {
         Date now = new Date();

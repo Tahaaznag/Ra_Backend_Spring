@@ -2,6 +2,7 @@ package com.bergerlevrault.Remoteassist.Entity;
 
 
 import com.bergerlevrault.Remoteassist.Enums.Role;
+import com.bergerlevrault.Remoteassist.Enums.Status;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -11,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Entity
 @AllArgsConstructor
@@ -35,6 +34,9 @@ public class UserRa implements UserDetails {
 
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

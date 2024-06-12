@@ -34,7 +34,10 @@ export class SignupComponent {
   }
 
   isFormValid() {
-    return this.email !== '' && this.password !== '' && (this.expertChecked || this.technicianChecked);
+    return this.name !== '' && this.prenom !== '' && this.email !== '' && this.password !== '' && this.role !== undefined;
   }
 
+  checkFormValidity() {
+
+  }
 }

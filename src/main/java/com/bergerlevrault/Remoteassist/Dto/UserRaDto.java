@@ -1,6 +1,7 @@
 package com.bergerlevrault.Remoteassist.Dto;
 
 import com.bergerlevrault.Remoteassist.Enums.Role;
+import com.bergerlevrault.Remoteassist.Enums.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class UserRaDto {
     private Boolean isAdmin;
     private Set<SessionRaDto> sessions;
     private List<Role> roles;
+    private Status status;
 }
