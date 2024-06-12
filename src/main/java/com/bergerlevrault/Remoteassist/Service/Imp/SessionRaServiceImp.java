@@ -46,7 +46,7 @@ public class SessionRaServiceImp implements SessionRaService {
 
     @Override
     public Optional<String> getSessionId(String senderID, String recipientId, boolean createNewSessionIfNotExists) {
-        return sessionRaRepo.findBySenderIdAndRecipient(senderID, recipientId)
+        return sessionRaRepo.findBySenderIdAndRecipientId(senderID, recipientId)
                 .map(SessionRa::getSessionId)
                 .or(() -> {
                     if (createNewSessionIfNotExists) {

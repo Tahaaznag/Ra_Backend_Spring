@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface SessionRaRepo extends JpaRepository<SessionRa,Long> {
-    Optional<SessionRa> findBySenderIdAndRecipient(String senderID, String recipientId);
+    Optional<SessionRa>findBySenderIdAndRecipientId(String senderId, String recipientId);
 }

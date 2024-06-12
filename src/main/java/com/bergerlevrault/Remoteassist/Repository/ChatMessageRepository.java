@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface ChatMessageRepository extends JpaRepository<Chat,String> {
-    List<Chat> findByChatID(String chatId);
+    List<Chat> findByChatId(String chatId);
 }

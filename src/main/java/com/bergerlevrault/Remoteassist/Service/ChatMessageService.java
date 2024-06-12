@@ -33,6 +33,6 @@ public class ChatMessageService {
                 recipientId,
                 false
         );
-        return chatID.map(chatMessageRepository::findByChatID).orElse(new ArrayList<>());
+        return chatID.map(chatMessageRepository::findByChatId).orElse(new ArrayList<>());
     }
 }
