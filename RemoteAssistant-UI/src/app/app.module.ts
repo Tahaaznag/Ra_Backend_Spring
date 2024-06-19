@@ -13,6 +13,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FooterComponent } from './pages/footer/footer.component';
+import { MessageComponent } from './pages/message/message.component';
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -28,7 +29,8 @@ export function KcFactory(KcService : KeycloakService){
     SignupComponent,
     HomeComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

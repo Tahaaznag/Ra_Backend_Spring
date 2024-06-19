@@ -5,6 +5,7 @@ import {TechnicienComponent} from "./pages/technicien/technicien.component";
 import {ExpertComponent} from "./pages/expert/expert.component";
 import {HomeComponent} from "./pages/home/home.component";
 import {SignupComponent} from "./pages/signup/signup.component";
+import {MessageComponent} from "./pages/message/message.component";
 
 const routes: Routes = [
   {
@@ -26,6 +27,10 @@ const routes: Routes = [
   {
     path: "signup",
     component:SignupComponent
+  },
+  {
+    path:"chat/:userId",
+    component:MessageComponent
   }
 ];
 
