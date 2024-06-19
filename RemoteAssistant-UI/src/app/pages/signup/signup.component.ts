@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Role } from 'src/app/services/role.enum';
+import { Role } from 'src/app/services/Chat/role.enum';
 
 @Component({
   selector: 'app-signup',

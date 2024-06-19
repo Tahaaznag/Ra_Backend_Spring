@@ -8,6 +8,7 @@ import {SignupComponent} from "./pages/signup/signup.component";
 import {ForgetComponent} from "./pages/forget/forget.component";
 import {MessagingComponent} from "./pages/messaging/messaging.component";
 import {VideoCallComponent} from "./pages/video-call/video-call.component";
+import {ChatPageComponent} from "./pages/chat-page/chat-page.component";
 
 const routes: Routes = [
   {
@@ -35,12 +36,16 @@ const routes: Routes = [
     component:ForgetComponent
   },
   {
-    path:"messaging",
+    path:'messaging',
     component:MessagingComponent
   },
   {
     path:"video-call",
     component:VideoCallComponent
+  },
+  {
+    path:"Chat",
+    component:ChatPageComponent
   }
 ];
 

@@ -1,0 +1,23 @@
+<!-- chat.component.html -->
+<div *ngIf="!username">
+  <h1>Type your username to enter the Chatroom</h1>
+  <form (ngSubmit)="connect()">
+    <input type="text" [(ngModel)]="username" placeholder="Username" autocomplete="off" />
+    <button type="submit">Start Chatting</button>
+  </form>
+</div>
+
+<div *ngIf="username">
+  <h2>Spring WebSocket Chat Demo - By Alibou</h2>
+  <ul>
+    <li *ngFor="let message of messages" [ngClass]="{'event-message': message.type === 'JOIN' || message.type === 'LEAVE', 'chat-message': message.type === 'CHAT'}">
+      <i *ngIf="message.type !== 'CHAT'" [style.backgroundColor]="getAvatarColor(message.sender)">{{ message.sender[0] }}</i>
+      <span>{{ message.sender }}</span>
+      <p>{{ message.content }}</p>
+    </li>
+  </ul>
+  <form (ngSubmit)="sendMessage()">
+    <input type="text" [(ngModel)]="message" placeholder="Type a message..." autocomplete="off" />
+    <button type="submit">Send</button>
+  </form>
+</div>

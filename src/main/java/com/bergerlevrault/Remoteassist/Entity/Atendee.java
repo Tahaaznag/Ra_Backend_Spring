@@ -16,11 +16,10 @@ import java.util.List;
 @Table(name = "\"Atendee\"")
 @Getter
 @Setter
-@EntityListeners(AuditingEntityListener.class)
 public class Atendee {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "User_Id", referencedColumnName = "userId")

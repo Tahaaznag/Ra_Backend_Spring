@@ -1,5 +1,5 @@
 package com.bergerlevrault.Remoteassist.Entity;
-import jakarta.persistence.*;
+import  jakarta.persistence.*;
 import lombok.*;
 
 import java.lang.annotation.Documented;

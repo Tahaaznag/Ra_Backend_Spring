@@ -17,7 +17,7 @@ public class ChatMessage {
     private Integer UserID;
     private LocalDateTime DateMessage;
     private String TextMessage;
-
+    private String sender;
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private MessageType TypeMessage = MessageType.CHAT;

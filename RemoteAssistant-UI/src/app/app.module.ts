@@ -16,6 +16,7 @@ import { FooterComponent } from './pages/footer/footer.component';
 import { ForgetComponent } from './pages/forget/forget.component';
 import { MessagingComponent } from './pages/messaging/messaging.component';
 import { VideoCallComponent } from './pages/video-call/video-call.component';
+import { ChatPageComponent } from './pages/chat-page/chat-page.component';
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -34,7 +35,8 @@ export function KcFactory(KcService : KeycloakService){
     FooterComponent,
     ForgetComponent,
     MessagingComponent,
-    VideoCallComponent
+    VideoCallComponent,
+    ChatPageComponent
   ],
   imports: [
     BrowserModule,
