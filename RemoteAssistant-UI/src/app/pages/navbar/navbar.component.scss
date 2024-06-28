@@ -3,7 +3,8 @@
 }
 .navbar-brand {
   font-family: apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  font-weight: 900;
+  font-weight: 700;
+  color: white;
 }
 .navbar-dark-blue {
   background-color: #2b5f96; /* Exemple de couleur de fond */
@@ -29,7 +30,10 @@
   border-color: #6c757d;
 }
 .nav-item{
-  margin-left: 20px;
+  margin-left: 60px;
+  font-weight: 700;
+  font-size:17px;
+  display: inline-block;
 }
 .btn {
   transition: background-color 1s ease, color 1s ease; /* Ajoutez une transition pour la couleur de fond et la couleur du texte */
