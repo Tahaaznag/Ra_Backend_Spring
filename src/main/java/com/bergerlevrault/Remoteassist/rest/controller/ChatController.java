@@ -17,4 +17,5 @@ public class ChatController {
     public ChatMessage chat(@DestinationVariable String roomId, ChatMessage message){
         return new ChatMessage(message.getMessage(), message.getUser());
     }
+
 }

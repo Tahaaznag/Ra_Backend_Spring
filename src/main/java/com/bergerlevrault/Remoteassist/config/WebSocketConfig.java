@@ -12,7 +12,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
 
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
-        registry.addEndpoint("/chat-socket")
+        registry.addEndpoint("/chat-socket","/webrtc-signaling")
                 .setAllowedOrigins("*");
     }
 

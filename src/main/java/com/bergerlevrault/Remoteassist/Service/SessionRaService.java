@@ -11,4 +11,5 @@ public interface SessionRaService {
     List<SessionRaDto> getAllSessions();
 
     List<SessionRaDto> getActiveSessions();
+    SessionRaDto joinSession(String roomCode);
 }

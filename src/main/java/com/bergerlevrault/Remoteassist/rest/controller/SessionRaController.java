@@ -20,10 +20,17 @@ public class SessionRaController {
         this.sessionRaService = sessionRaService;
     }
 
-    @PostMapping(ResourcesPath.CREATIONSESSION)
+
+    @PostMapping("/create")
     public ResponseEntity<SessionRaDto> createSession(@RequestBody SessionRaDto sessionDto) {
         SessionRaDto newSession = sessionRaService.createSession(sessionDto);
         return new ResponseEntity<>(newSession, HttpStatus.CREATED);
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<SessionRaDto> joinSession(@RequestParam String roomCode) {
+        SessionRaDto session = sessionRaService.joinSession(roomCode);
+        return new ResponseEntity<>(session, HttpStatus.OK);
     }
 
     @GetMapping(ResourcesPath.ALLSESSIONS)

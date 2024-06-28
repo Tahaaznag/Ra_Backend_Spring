@@ -58,4 +58,5 @@ public class UserRaServiceImp implements UserRaService {
     public void deleteUser(Long id) {
         userRaRepo.deleteById(id);
     }
+
 }

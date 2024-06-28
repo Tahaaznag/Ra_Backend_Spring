@@ -23,7 +23,9 @@ public class SessionRaServiceImp implements SessionRaService {
 
     @Override
     public SessionRaDto createSession(SessionRaDto sessionDto) {
+        String roomCode = generateUniqueRoomCode();
         SessionRa session = sessionMapper.mapToSession(sessionDto);
+        session.setRoomCode(roomCode);
         SessionRa savedSession = sessionRaRepo.save(session);
         return sessionMapper.mapToDto(savedSession);
     }
@@ -41,6 +43,16 @@ public class SessionRaServiceImp implements SessionRaService {
                 .filter(SessionRa::isActive) // Assuming you have an `isActive` method or field in `SessionRa`
                 .collect(Collectors.toList());
         return sessionMapper.mapToDtoList(activeSessions);
+    }
+    @Override
+    public SessionRaDto joinSession(String roomCode) {
+        SessionRa session = sessionRaRepo.findByRoomCode(roomCode)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+        return sessionMapper.mapToDto(session);
+    }
+    private String generateUniqueRoomCode() {
+        // Implémentez la logique pour générer un code unique
+        return "ROOM" + System.currentTimeMillis();
     }
 
 }

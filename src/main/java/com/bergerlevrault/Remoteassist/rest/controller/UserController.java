@@ -20,13 +20,11 @@ public class UserController {
         this.userRaService = userRaService;
     }
 
-
     @PostMapping(ResourcesPath.USERS)
     public ResponseEntity<UserRaDto> createUser(@RequestBody UserRaDto userDto) {
         UserRaDto ajouteruser = userRaService.createUser(userDto);
         return new ResponseEntity<>(ajouteruser, HttpStatus.OK);
     }
-
 
     @GetMapping(ResourcesPath.ALLUSERS)
     public ResponseEntity<List<UserRaDto>> getAllUsers() {
@@ -34,13 +32,11 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-
     @GetMapping(ResourcesPath.USERS + "/{" + ResourcesPath.USERSID + "}")
     public ResponseEntity<UserRaDto> getUserById(@PathVariable Long id) {
         Optional<UserRaDto> user = userRaService.getUserById(id);
         return user.map(ResponseEntity::ok).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
 
     @PutMapping("update/{id}")
     public ResponseEntity<UserRaDto> updateUser(@PathVariable Long id, @RequestBody UserRaDto userDto) {
@@ -57,4 +53,5 @@ public class UserController {
         userRaService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
