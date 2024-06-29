@@ -1,10 +1,14 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
 import com.bergerlevrault.Remoteassist.Dto.UserRaDto;
+import com.bergerlevrault.Remoteassist.Entity.UserRa;
+import com.bergerlevrault.Remoteassist.Mapper.UserMapper;
 import com.bergerlevrault.Remoteassist.Service.Imp.UserRaServiceImp;
 import com.bergerlevrault.Remoteassist.utils.ResourcesPath;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -53,5 +57,13 @@ public class UserController {
         userRaService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+    @GetMapping("/me")
+    @PreAuthorize("hasAuthority('EXPERT') or hasAuthority('ADMIN')")
+    public ResponseEntity<UserRaDto> getCurrentUser(@AuthenticationPrincipal UserRa userRa) {
+        UserRaDto userDto = userRaService.getCurrentUserDto(userRa);
+        return ResponseEntity.ok(userDto);
+    }
+
+
 
 }

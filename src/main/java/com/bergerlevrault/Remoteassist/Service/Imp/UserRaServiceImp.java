@@ -38,6 +38,9 @@ public class UserRaServiceImp implements UserRaService {
     public Optional<UserRaDto> getUserById(Long id) {
         return Optional.empty();
     }
+    public UserRaDto getCurrentUserDto(UserRa userRa) {
+        return userMapper.mapToDto(userRa);
+    }
 
 
 

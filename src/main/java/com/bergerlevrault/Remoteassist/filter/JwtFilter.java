@@ -60,6 +60,7 @@ public class JwtFilter extends OncePerRequestFilter {
                         new WebAuthenticationDetailsSource().buildDetails(request)
                 );
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                System.out.println("Extracted email in JwtFilter: " + userEmail);
             }
         }
         filterChain.doFilter(request, response);

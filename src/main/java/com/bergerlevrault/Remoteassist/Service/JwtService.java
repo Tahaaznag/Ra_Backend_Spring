@@ -21,7 +21,13 @@ public class JwtService {
     private static final long jwtExpiration = 1000 * 60 * 60 * 10;
 
     public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
+        Claims claims = extractAllClaims(token);
+        String email = claims.get("email", String.class);
+        if (email == null || email.isEmpty()) {
+            email = claims.getSubject();
+        }
+        System.out.println("Extracted email from token: " + email);
+        return email;
     }
 
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
@@ -52,9 +58,10 @@ public class JwtService {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(userDetails.getUsername())  // Ceci devrait être l'email
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .claim("fullName", extraClaims.getOrDefault("fullName", ""))
                 .claim("authorities", authorities)
                 .signWith(getSignInKey())
                 .compact();
@@ -62,7 +69,8 @@ public class JwtService {
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        System.out.println("Generated token for: " + username);
+        return (username != null && username.equals(userDetails.getUsername())) && !isTokenExpired(token);
     }
 
     private boolean isTokenExpired(String token) {
