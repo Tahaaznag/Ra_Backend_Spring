@@ -22,7 +22,7 @@ public class SessionRaServiceImp implements SessionRaService {
     }
 
     @Override
-    public SessionRaDto createSession(SessionRaDto sessionDto) {
+    public SessionRaDto createSession(SessionRaDto sessionDto, Long userId) {
         String roomCode = generateUniqueRoomCode();
         SessionRa session = sessionMapper.mapToSession(sessionDto);
         session.setRoomCode(roomCode);

@@ -38,5 +38,3 @@ public interface SessionMapper {
 
     List<SessionRaDto> mapToDtoList(List<SessionRa> sessions);
 }
-
-

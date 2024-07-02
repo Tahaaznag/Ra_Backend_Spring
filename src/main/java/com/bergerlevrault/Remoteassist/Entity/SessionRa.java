@@ -29,4 +29,3 @@ public class SessionRa {
         return dateDebut.before(now) && dateFin.after(now);
     }
 }
-

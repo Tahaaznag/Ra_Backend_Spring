@@ -63,6 +63,12 @@ public class UserController {
         UserRaDto userDto = userRaService.getCurrentUserDto(userRa);
         return ResponseEntity.ok(userDto);
     }
+    @PutMapping("/updateme")
+    @PreAuthorize("hasAuthority('EXPERT') or hasAuthority('ADMIN')")
+    public ResponseEntity<UserRaDto> updateCurrentUser(@AuthenticationPrincipal UserRa userRa, @RequestBody UserRaDto updatedUserDto) {
+        UserRaDto updatedUser = userRaService.updateCurrentUser(userRa.getUserId(), updatedUserDto);
+        return ResponseEntity.ok(updatedUser);
+    }
 
 
 

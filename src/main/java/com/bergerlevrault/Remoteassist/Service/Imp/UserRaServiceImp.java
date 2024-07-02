@@ -61,5 +61,17 @@ public class UserRaServiceImp implements UserRaService {
     public void deleteUser(Long id) {
         userRaRepo.deleteById(id);
     }
+    @Override
+    public UserRaDto updateCurrentUser(Long userId, UserRaDto updatedUserDto) {
+        UserRa user = userRaRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        user.setNom(updatedUserDto.getNom());
+        user.setPrenom(updatedUserDto.getPrenom());
+        user.setEmail(updatedUserDto.getEmail());
+
+        UserRa savedUser = userRaRepo.save(user);
+        return userMapper.mapToDto(savedUser);
+    }
 
 }

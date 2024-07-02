@@ -1,11 +1,12 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
-import com.bergerlevrault.Remoteassist.Entity.SessionRa;
 import com.bergerlevrault.Remoteassist.Service.SessionRaService;
 import com.bergerlevrault.Remoteassist.utils.ResourcesPath;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,10 +21,11 @@ public class SessionRaController {
         this.sessionRaService = sessionRaService;
     }
 
-
     @PostMapping("/create")
     public ResponseEntity<SessionRaDto> createSession(@RequestBody SessionRaDto sessionDto) {
-        SessionRaDto newSession = sessionRaService.createSession(sessionDto);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = Long.parseLong(authentication.getName());
+        SessionRaDto newSession = sessionRaService.createSession(sessionDto, userId);
         return new ResponseEntity<>(newSession, HttpStatus.CREATED);
     }
 
@@ -35,13 +37,13 @@ public class SessionRaController {
 
     @GetMapping(ResourcesPath.ALLSESSIONS)
     public ResponseEntity<List<SessionRaDto>> getAllSessions() {
-        List<SessionRaDto> sessions =sessionRaService.getAllSessions();
+        List<SessionRaDto> sessions = sessionRaService.getAllSessions();
         return new ResponseEntity<>(sessions, HttpStatus.OK);
     }
 
     @GetMapping(ResourcesPath.ACTIVE)
     public ResponseEntity<List<SessionRaDto>> getActiveSessions() {
         List<SessionRaDto> activeSessions = sessionRaService.getActiveSessions();
-        return new ResponseEntity<>(activeSessions, HttpStatus.ACCEPTED);
+        return new ResponseEntity<>(activeSessions, HttpStatus.OK);
     }
 }

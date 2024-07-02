@@ -13,5 +13,6 @@ public interface UserRaService {
     UserRaDto updateUser(Long id, UserRaDto userDto);
     void deleteUser(Long id);
     UserRaDto getCurrentUserDto(UserRa userRa);
+    UserRaDto updateCurrentUser(Long userId, UserRaDto updatedUserDto);
 
 }
