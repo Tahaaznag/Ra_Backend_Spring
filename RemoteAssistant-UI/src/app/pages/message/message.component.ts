@@ -11,7 +11,8 @@ import { ActivatedRoute } from "@angular/router";
 export class MessageComponent implements OnInit {
   messageInput: string = '';
   userId: string = '';
-  messageList: any[] = [];
+  messageList: { message: string, message_side: string }[] = [];
+  userAvatar: string | null = null;
 
   constructor(private messageService: MessageService, private route: ActivatedRoute) {}
 
@@ -19,6 +20,7 @@ export class MessageComponent implements OnInit {
     this.userId = this.route.snapshot.params["userId"];
     this.messageService.joinRoom("ABC");
     this.listenerMessage();
+    this.userAvatar = localStorage.getItem('userAvatar');
   }
 
   sendMessage() {
@@ -28,6 +30,13 @@ export class MessageComponent implements OnInit {
     } as ChatMessage;
     this.messageService.sendMessage("ABC", chatMessage);
     this.messageInput = '';
+    if (this.messageInput.trim()) {
+      this.messageList.push({
+        message: this.messageInput,
+        message_side: 'sender'
+      });
+      this.messageInput = '';
+    }
   }
 
   listenerMessage() {

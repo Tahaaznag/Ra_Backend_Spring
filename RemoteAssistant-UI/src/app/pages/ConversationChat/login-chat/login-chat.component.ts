@@ -22,7 +22,9 @@ export class LoginChatComponent {
     if (this.username && this.date) {
       const randomId = this.generateRandomId();
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-
+      const firstChar = this.username.charAt(0).toUpperCase();
+      localStorage.setItem('username', this.username);
+      localStorage.setItem('userAvatar', firstChar);
       users.push({ username: this.username, date: this.date, id: randomId, status: 'online' });
 
       localStorage.setItem('users', JSON.stringify(users));

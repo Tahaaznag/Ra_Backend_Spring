@@ -14,6 +14,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { MessageComponent } from './pages/message/message.component';
+import {RouterModule} from "@angular/router";
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -37,6 +38,7 @@ export function KcFactory(KcService : KeycloakService){
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    RouterModule
   ],
   providers: [
     HttpClient,
