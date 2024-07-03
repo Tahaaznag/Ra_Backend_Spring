@@ -7,7 +7,7 @@ import {Component, ViewChild} from '@angular/core';
 })
 export class TechnicienComponent{
 
-  users: { username: string, id: string, status: string }[] = [];
+  users: { username: string, date: string, id: string, status: string }[] = [];
 
   constructor() {
     const users = localStorage.getItem('users');
