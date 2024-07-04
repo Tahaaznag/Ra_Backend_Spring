@@ -21,7 +21,7 @@
       </ul>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <button type="button" class="btn btn-danger btn-lg me-2" [routerLink]="['/logout']">Logout</button>
+          <button type="button" class="btn btn-danger" [routerLink]="['/logout']">Logout</button>
         </li>
       </ul>
     </div>
@@ -30,23 +30,23 @@
 
 <!-- Centered Table to display the usernames and ids -->
 <div class="d-flex justify-content-center mt-5">
-  <div class="card" style="width: 40rem;">
+  <div class="card" style="width: 80rem;">
     <div class="card-body">
-      <h5 class="card-title text-center">Informations</h5>
+      <h5 class="card-title text-center">Technicien en ligne : </h5>
       <table class="table table-bordered table-striped text-center">
         <thead class="table-dark">
         <tr>
+          <th scope="col">ID :</th>
           <th scope="col">Nom :</th>
           <th scope="col">Date :</th>
-          <th scope="col">ID :</th>
           <th scope="col">Status</th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let user of users; let i = index">
+          <td>{{ user.id }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.date }}</td>
-          <td>{{ user.id }}</td>
           <td>
             <button type="button" class="btn" [ngClass]="{'btn-success': user.status === 'online', 'btn-secondary': user.status === 'offline'}" (click)="toggleStatus(i)">
               {{ user.status }}
