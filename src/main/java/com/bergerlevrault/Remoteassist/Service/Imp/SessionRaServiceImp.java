@@ -2,8 +2,10 @@ package com.bergerlevrault.Remoteassist.Service.Imp;
 
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
 import com.bergerlevrault.Remoteassist.Entity.SessionRa;
+import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Mapper.SessionMapper;
 import com.bergerlevrault.Remoteassist.Repository.SessionRaRepo;
+import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
 import com.bergerlevrault.Remoteassist.Service.SessionRaService;
 import org.springframework.stereotype.Service;
 
@@ -14,18 +16,23 @@ import java.util.stream.Collectors;
 public class SessionRaServiceImp implements SessionRaService {
 
     private final SessionRaRepo sessionRaRepo;
+    private final UserRaRepo userRaRepo;
     private final SessionMapper sessionMapper;
 
-    public SessionRaServiceImp(SessionRaRepo sessionRaRepo, SessionMapper sessionMapper) {
+    public SessionRaServiceImp(SessionRaRepo sessionRaRepo, UserRaRepo userRaRepo, SessionMapper sessionMapper) {
         this.sessionRaRepo = sessionRaRepo;
+        this.userRaRepo = userRaRepo;
         this.sessionMapper = sessionMapper;
     }
 
     @Override
     public SessionRaDto createSession(SessionRaDto sessionDto, Long userId) {
         String roomCode = generateUniqueRoomCode();
+        UserRa user = userRaRepo.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
         SessionRa session = sessionMapper.mapToSession(sessionDto);
         session.setRoomCode(roomCode);
+        session.setUser(user); // Assign the user who created the session
         SessionRa savedSession = sessionRaRepo.save(session);
         return sessionMapper.mapToDto(savedSession);
     }
@@ -40,19 +47,29 @@ public class SessionRaServiceImp implements SessionRaService {
     public List<SessionRaDto> getActiveSessions() {
         List<SessionRa> sessions = sessionRaRepo.findAll();
         List<SessionRa> activeSessions = sessions.stream()
-                .filter(SessionRa::isActive) // Assuming you have an `isActive` method or field in `SessionRa`
+                .filter(SessionRa::isActive)
                 .collect(Collectors.toList());
         return sessionMapper.mapToDtoList(activeSessions);
     }
+
     @Override
     public SessionRaDto joinSession(String roomCode) {
         SessionRa session = sessionRaRepo.findByRoomCode(roomCode)
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         return sessionMapper.mapToDto(session);
     }
+
     private String generateUniqueRoomCode() {
-        // Implémentez la logique pour générer un code unique
         return "ROOM" + System.currentTimeMillis();
     }
+    public SessionRaDto getSessionById(Long sessionId) {
+        SessionRa session = sessionRaRepo.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+        return sessionMapper.mapToDto(session);
+    }
 
+    public SessionRa getSessionEntityById(Long sessionId) {
+        return sessionRaRepo.findById(sessionId)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+    }
 }

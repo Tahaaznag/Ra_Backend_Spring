@@ -18,10 +18,14 @@ public class SessionRa {
     private String sessionName;
     private Date dateDebut;
     private Date dateFin;
+
     @ManyToOne
+    @JoinColumn(name = "userId")
     private UserRa user;
+
     @OneToMany(mappedBy = "session")
     private Set<Chat> chats;
+
     private String roomCode;
 
     public boolean isActive() {

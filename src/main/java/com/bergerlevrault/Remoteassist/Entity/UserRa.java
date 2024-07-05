@@ -1,6 +1,5 @@
 package com.bergerlevrault.Remoteassist.Entity;
 
-
 import com.bergerlevrault.Remoteassist.Enums.Role;
 import jakarta.persistence.*;
 import lombok.*;

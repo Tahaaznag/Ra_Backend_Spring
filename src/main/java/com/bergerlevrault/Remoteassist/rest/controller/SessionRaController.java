@@ -1,6 +1,7 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
+import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Service.SessionRaService;
 import com.bergerlevrault.Remoteassist.utils.ResourcesPath;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class SessionRaController {
     @PostMapping("/create")
     public ResponseEntity<SessionRaDto> createSession(@RequestBody SessionRaDto sessionDto) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Long userId = Long.parseLong(authentication.getName());
+        Long userId = ((UserRa) authentication.getPrincipal()).getUserId();
         SessionRaDto newSession = sessionRaService.createSession(sessionDto, userId);
         return new ResponseEntity<>(newSession, HttpStatus.CREATED);
     }
