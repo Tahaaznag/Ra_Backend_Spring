@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -23,8 +24,8 @@ public class SessionRa {
     @JoinColumn(name = "userId")
     private UserRa user;
 
-    @OneToMany(mappedBy = "session")
-    private Set<Chat> chats;
+    @OneToMany(mappedBy = "session", cascade = CascadeType.ALL,  fetch = FetchType.EAGER)
+    private Set<Chat> chats = new HashSet<>();
 
     private String roomCode;
 

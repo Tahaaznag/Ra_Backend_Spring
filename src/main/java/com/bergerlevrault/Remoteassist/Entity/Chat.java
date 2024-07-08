@@ -15,14 +15,16 @@ import java.util.Date;
 public class Chat {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long Chat_id;
+    private long chatId;
+
     @ManyToOne
     @JoinColumn(name = "session_id")
     private SessionRa session;
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private UserRa user;
-    private Timestamp Chat_Date;
-    private String Message;
 
+    @ManyToOne
+    @JoinColumn(name = "userId")
+    private UserRa user;
+
+    private Timestamp chatDate;
+    private String message;
 }

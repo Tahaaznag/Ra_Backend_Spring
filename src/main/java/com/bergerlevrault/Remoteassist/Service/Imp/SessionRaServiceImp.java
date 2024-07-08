@@ -1,8 +1,10 @@
 package com.bergerlevrault.Remoteassist.Service.Imp;
 
+import com.bergerlevrault.Remoteassist.Dto.ChatDto;
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
 import com.bergerlevrault.Remoteassist.Entity.SessionRa;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
+import com.bergerlevrault.Remoteassist.Mapper.ChatMapper;
 import com.bergerlevrault.Remoteassist.Mapper.SessionMapper;
 import com.bergerlevrault.Remoteassist.Repository.SessionRaRepo;
 import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
@@ -18,11 +20,13 @@ public class SessionRaServiceImp implements SessionRaService {
     private final SessionRaRepo sessionRaRepo;
     private final UserRaRepo userRaRepo;
     private final SessionMapper sessionMapper;
+    private final ChatMapper chatMapper;
 
-    public SessionRaServiceImp(SessionRaRepo sessionRaRepo, UserRaRepo userRaRepo, SessionMapper sessionMapper) {
+    public SessionRaServiceImp(SessionRaRepo sessionRaRepo, UserRaRepo userRaRepo, SessionMapper sessionMapper, ChatMapper chatMapper) {
         this.sessionRaRepo = sessionRaRepo;
         this.userRaRepo = userRaRepo;
         this.sessionMapper = sessionMapper;
+        this.chatMapper=chatMapper;
     }
 
     @Override
@@ -71,5 +75,10 @@ public class SessionRaServiceImp implements SessionRaService {
     public SessionRa getSessionEntityById(Long sessionId) {
         return sessionRaRepo.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Session not found"));
+    }
+    public List<ChatDto> getChatsBySession(String roomCode) {
+        SessionRa session = sessionRaRepo.findByRoomCode(roomCode)
+                .orElseThrow(() -> new RuntimeException("Session not found"));
+        return session.getChats().stream().map(chatMapper::toDto).collect(Collectors.toList());
     }
 }

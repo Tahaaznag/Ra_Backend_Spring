@@ -1,5 +1,6 @@
 package com.bergerlevrault.Remoteassist.rest.controller;
 
+import com.bergerlevrault.Remoteassist.Dto.ChatDto;
 import com.bergerlevrault.Remoteassist.Dto.SessionRaDto;
 import com.bergerlevrault.Remoteassist.Entity.UserRa;
 import com.bergerlevrault.Remoteassist.Service.SessionRaService;
@@ -34,6 +35,11 @@ public class SessionRaController {
     public ResponseEntity<SessionRaDto> joinSession(@RequestParam String roomCode) {
         SessionRaDto session = sessionRaService.joinSession(roomCode);
         return new ResponseEntity<>(session, HttpStatus.OK);
+    }
+    @GetMapping("/chats")
+    public ResponseEntity<List<ChatDto>> getChatsByRoomCode(@RequestParam String roomCode) {
+        List<ChatDto> chats = sessionRaService.getChatsBySession(roomCode);
+        return new ResponseEntity<>(chats, HttpStatus.OK);
     }
 
     @GetMapping(ResourcesPath.ALLSESSIONS)
