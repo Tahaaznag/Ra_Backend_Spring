@@ -12,6 +12,7 @@ import com.bergerlevrault.Remoteassist.Service.SessionRaService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -30,16 +31,20 @@ public class SessionRaServiceImp implements SessionRaService {
     }
 
     @Override
-    public SessionRaDto createSession(SessionRaDto sessionDto, Long userId) {
-        String roomCode = generateUniqueRoomCode();
-        UserRa user = userRaRepo.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+    public SessionRaDto createSession(SessionRaDto sessionDto) {
+        // Génération du roomCode (exemple avec UUID)
+        String roomCode = UUID.randomUUID().toString().substring(0, 6); // Génération aléatoire
+        sessionDto.setRoomCode(roomCode);
+
+        // Enregistrement de la session
         SessionRa session = sessionMapper.mapToSession(sessionDto);
-        session.setRoomCode(roomCode);
-        session.setUser(user); // Assign the user who created the session
         SessionRa savedSession = sessionRaRepo.save(session);
+
+        // Mapper et retourner le DTO de session sauvegardée
         return sessionMapper.mapToDto(savedSession);
     }
+
+
 
     @Override
     public List<SessionRaDto> getAllSessions() {
@@ -66,6 +71,7 @@ public class SessionRaServiceImp implements SessionRaService {
     private String generateUniqueRoomCode() {
         return "ROOM" + System.currentTimeMillis();
     }
+
     public SessionRaDto getSessionById(Long sessionId) {
         SessionRa session = sessionRaRepo.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Session not found"));
@@ -81,4 +87,12 @@ public class SessionRaServiceImp implements SessionRaService {
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         return session.getChats().stream().map(chatMapper::toDto).collect(Collectors.toList());
     }
+
+    /*@Override
+    public SessionRaDto createSession(SessionRaDto SessionDto) {
+        String roomCode = generateUniqueRoomCode();
+        SessionDto.setRoomCode(roomCode);
+        return SessionDto;
+    }*/
+
 }

@@ -7,7 +7,7 @@ import com.bergerlevrault.Remoteassist.Entity.SessionRa;
 import java.util.List;
 
 public interface SessionRaService {
-    SessionRaDto createSession(SessionRaDto sessionDto, Long userId);
+    SessionRaDto createSession(SessionRaDto sessionDto);
 
     List<SessionRaDto> getAllSessions();
 
@@ -17,4 +17,5 @@ public interface SessionRaService {
     SessionRa getSessionEntityById(Long sessionId);
     List<ChatDto> getChatsBySession(String roomCode);
 
+    //SessionRaDto createSession(SessionRaDto sessionDto);
 }

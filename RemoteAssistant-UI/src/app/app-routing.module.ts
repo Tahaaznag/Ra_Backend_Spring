@@ -31,7 +31,7 @@ const routes: Routes = [
     component:SignupComponent
   },
   {
-    path:"chat/:userId",
+    path:"chat/:username",
     component:MessageComponent
   },
   {

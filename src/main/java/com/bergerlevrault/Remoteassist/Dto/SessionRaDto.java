@@ -19,5 +19,5 @@ public class SessionRaDto {
     private Date dateFin;
     private UserRaDto user;
     private Set<ChatDto> chats;
-    private String roomCode; // Ajoutez cette ligne
+    private String roomCode;
 }
