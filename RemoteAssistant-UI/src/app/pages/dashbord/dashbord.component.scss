@@ -11,8 +11,8 @@
 
 .nav-link {
   color: white; /* Couleur des liens de navigation */
-  margin-right: 18px;
-  margin-left: 20px;
+  margin-right: 28px;
+  margin-left: auto;
 }
 
 .nav-link:hover {
@@ -29,7 +29,8 @@
   border-color: #6c757d;
 }
 .nav-item{
-  margin-left: 20px;
+  margin-left: 50px;
+  font-weight: 800;
 }
 .btn {
   transition: background-color 1s ease, color 1s ease; /* Ajoutez une transition pour la couleur de fond et la couleur du texte */
