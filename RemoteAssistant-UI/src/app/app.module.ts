@@ -14,6 +14,9 @@ import { HomeComponent } from './pages/home/home.component';
 import { NavbarComponent } from './pages/navbar/navbar.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { MessageComponent } from './pages/message/message.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {NgxSpinnerComponent, NgxSpinnerModule} from "ngx-spinner";
 
 export function KcFactory(KcService : KeycloakService){
   return () => KcService.init();
@@ -30,23 +33,19 @@ export function KcFactory(KcService : KeycloakService){
     HomeComponent,
     NavbarComponent,
     FooterComponent,
-    MessageComponent
+    MessageComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    BrowserAnimationsModule,
+    NgxSpinnerComponent,
+    NgxSpinnerModule
   ],
-  providers: [
-    HttpClient,
-   /* {
-      provide: APP_INITIALIZER,
-      deps:[KeycloakService],
-      useFactory: KcFactory,
-      multi: true
-    }*/
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

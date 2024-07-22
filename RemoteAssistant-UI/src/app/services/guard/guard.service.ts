@@ -1,13 +1,22 @@
-import {CanActivateFn, Router} from '@angular/router';
-import {TokenService} from '../token/token.service';
-import {inject} from '@angular/core';
+import { Injectable } from '@angular/core';
+import { CanActivate, CanDeactivate } from '@angular/router';
+import {LoadingService} from "../Loading/loading.service";
 
-export const authGuard: CanActivateFn = () => {
-  const tokenService = inject(TokenService);
-  const router = inject(Router);
-  if (tokenService.isTokenNotValid()) {
-    router.navigate(['login']);
-    return false;
+@Injectable({
+  providedIn: 'root'
+})
+export class LoadingGuard implements CanActivate, CanDeactivate<any> {
+
+  constructor(private loadingService: LoadingService) { }
+
+  canActivate(): boolean {
+    this.loadingService.show();
+    setTimeout(() => this.loadingService.hide(), 1000); // Cache le spinner après 1 seconde (ajustez le délai selon les besoins)
+    return true;
   }
-  return true;
-};
+
+  canDeactivate(): boolean {
+    this.loadingService.hide();
+    return true;
+  }
+}

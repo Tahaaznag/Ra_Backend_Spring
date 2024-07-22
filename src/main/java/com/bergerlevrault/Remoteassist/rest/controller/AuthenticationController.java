@@ -28,11 +28,11 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     public ResponseEntity<LoginResponse> authenticate(@RequestBody @Valid LoginRequest request) {
-        System.out.println("test 1");
+        System.out.println("Received login request: " + request);
         LoginResponse response = authenticationService.authenticate(request);
-        System.out.println("test 2");
         return ResponseEntity.ok(response);
     }
+
 
     @GetMapping("/activate-account")
     public void confirm(@RequestParam String token) throws MessagingException {

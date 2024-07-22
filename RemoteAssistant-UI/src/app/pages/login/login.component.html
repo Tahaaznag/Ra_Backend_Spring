@@ -7,7 +7,6 @@
       <h2 class="titre">Se connecter</h2>
       <form (ngSubmit)="login()" #loginForm="ngForm">
         <div class="form-group">
-          <!-- EMAIL -->
           <label for="email" class="form-label">Adresse E-mail</label>
           <input
             type="email"
@@ -17,23 +16,20 @@
             placeholder="Saisissez votre adresse mail"
             [(ngModel)]="email"
             required
-            (input)="checkFormValidity()"
-          />
+            autocomplete="email"/>
         </div>
-        <!-- PASSWORD -->
         <div class="form-group2">
           <label for="password" class="form-label2">Mot de passe</label>
           <div class="input-group2">
             <input
-              type="{{ passwordVisible ? 'text' : 'password' }}"
+              [type]="passwordVisible ? 'text' : 'password'"
               class="form-control2"
               id="password"
               name="password"
               placeholder="Entrez votre mot de passe"
               [(ngModel)]="password"
               required
-              (input)="checkFormValidity()"
-            />
+              autocomplete="current-password"/>
             <button
               class="btn toggle-password"
               type="button"
@@ -43,22 +39,26 @@
             </button>
           </div>
         </div>
-
         <button
           type="submit"
           class="rm-green_button"
           [disabled]="!isFormValid()"
-          [ngClass]="{'button-disabled': !isFormValid(), 'button-enabled': isFormValid()}">
+          [ngClass]="{
+            'button-disabled': !isFormValid(),
+            'button-enabled': isFormValid()
+          }"
+        >
           Se connecter
         </button>
-
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
         <div class="forgot-password-link">
           <a href="/forgot-password">Mot de passe oublié ?</a>
         </div>
       </form>
     </div>
   </div>
-
   <div class="login-image-container">
     <div class="login-image">
       <img src="assets/f6e9885adfc4c5eebbc6ca45d7d0651d.jpg" alt="">

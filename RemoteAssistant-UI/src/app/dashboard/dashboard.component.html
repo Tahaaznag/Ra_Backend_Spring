@@ -1,0 +1,61 @@
+<nav class="navbar navbar-expand-lg navbar-light navbar-dark-blue">
+  <div class="container-fluid">
+    <a class="navbar-brand">
+      <img src="assets/groupBl.png" style="height: 30px; margin-right: 10px;">
+      RemoteAssistant
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/home">Accueil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/loginChat">Chat</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/dashboard">Services</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/profile">Profile</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <button type="button" class="btn btn-custom-red" [routerLink]="['/']">Logout</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+<section id="services" class="Services">
+  <div class="card">
+    <img src="assets/messaging.jpg" alt="">
+    <div class="container">
+      <h4><b>Messaging</b></h4>
+      <p class="card-description">Dynamique, instantané, connecté.</p>
+      <a routerLink="/messaging" class="btn">Connecter vous</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <img src="assets/videoCall.avif" alt="">
+    <div class="container">
+      <h4><b>Appel Video</b></h4>
+      <p class="card-description">Interactif, immersif, direct.</p>
+      <a routerLink="/video-call" class="btn">Connecter vous</a>
+    </div>
+  </div>
+  <div class="card">
+    <img src="assets/img_3.png" alt="">
+    <div class="container">
+      <h4><b>Technicien En Ligne</b></h4>
+      <p class="card-description">Efficacité, Rapidité, direct.</p>
+      <a routerLink="/technicien" class="btn">Connecter vous</a>
+    </div>
+  </div>
+</section>

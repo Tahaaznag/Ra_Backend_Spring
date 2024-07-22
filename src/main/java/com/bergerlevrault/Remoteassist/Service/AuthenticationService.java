@@ -64,24 +64,10 @@ public class AuthenticationService {
                             request.getPassword()
                     )
             );
-
             var user = ((UserRa) auth.getPrincipal());
-
-
-
-
-
             var claims = new HashMap<String, Object>();
             claims.put("fullName", user.getNom());
             claims.put("email", user.getEmail());
-
-
-
-
-
-
-
-
             var jwtToken = jwtService.generateToken(claims, user);
             System.out.println("Generated token for user: " + user.getEmail());
             return LoginResponse.builder()

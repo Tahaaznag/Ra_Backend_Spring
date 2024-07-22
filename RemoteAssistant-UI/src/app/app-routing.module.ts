@@ -7,40 +7,49 @@ import {HomeComponent} from "./pages/home/home.component";
 import {SignupComponent} from "./pages/signup/signup.component";
 import {MessageComponent} from "./pages/message/message.component";
 import {LoginChatComponent} from "./pages/ConversationChat/login-chat/login-chat.component";
-import {DashbordComponent} from "./pages/dashbord/dashbord.component";
+import {DashboardComponent} from "./dashboard/dashboard.component";
+import {LoadingGuard} from "./services/guard/guard.service";
 
 const routes: Routes = [
   {
     path : "login" ,
-    component : LoginComponent
+    component : LoginComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path : "technicien",
-    component: TechnicienComponent
+    component: TechnicienComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path: "expert",
-    component:ExpertComponent
+    component:ExpertComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path : '',
-    component:HomeComponent
+    component:HomeComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path: "signup",
-    component:SignupComponent
+    component:SignupComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path:"chat/:username",
-    component:MessageComponent
+    component:MessageComponent,
+    canActivate: [LoadingGuard]
   },
   {
     path:'loginChat',
-    component:LoginChatComponent
+    component:LoginChatComponent,
+    canActivate: [LoadingGuard]
   },
   {
-    path:'dashbord',
-    component:DashbordComponent
+    path:'dashboard',
+    component:DashboardComponent,
+    canActivate: [LoadingGuard]
   }
 ];
 
