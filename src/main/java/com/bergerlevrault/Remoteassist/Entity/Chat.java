@@ -1,8 +1,9 @@
 package com.bergerlevrault.Remoteassist.Entity;
+
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Timestamp;
+import java.sql.Timestamp;  // Import correct
 import java.util.Date;
 
 @Entity
@@ -17,7 +18,7 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long chatId;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "session_id")
     private SessionRa session;
 
@@ -25,6 +26,6 @@ public class Chat {
     @JoinColumn(name = "userId")
     private UserRa user;
 
-    private Timestamp chatDate;
+    private Timestamp chatDate;  // Ensure it's Timestamp
     private String message;
 }

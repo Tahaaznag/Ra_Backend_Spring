@@ -9,6 +9,7 @@ import com.bergerlevrault.Remoteassist.Mapper.SessionMapper;
 import com.bergerlevrault.Remoteassist.Repository.SessionRaRepo;
 import com.bergerlevrault.Remoteassist.Repository.UserRaRepo;
 import com.bergerlevrault.Remoteassist.Service.SessionRaService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -32,18 +33,19 @@ public class SessionRaServiceImp implements SessionRaService {
 
     @Override
     public SessionRaDto createSession(SessionRaDto sessionDto) {
-        // Génération du roomCode (exemple avec UUID)
-        String roomCode = UUID.randomUUID().toString().substring(0, 6); // Génération aléatoire
-        sessionDto.setRoomCode(roomCode);
 
-        // Enregistrement de la session
+        String sessionCode = generateUniqueSessionCode();
+        sessionDto.setSessionCode(sessionCode);
+
         SessionRa session = sessionMapper.mapToSession(sessionDto);
         SessionRa savedSession = sessionRaRepo.save(session);
 
-        // Mapper et retourner le DTO de session sauvegardée
         return sessionMapper.mapToDto(savedSession);
     }
 
+    private String generateUniqueSessionCode() {
+        return "SESSION" + UUID.randomUUID().toString().substring(0, 6);
+    }
 
 
     @Override
@@ -67,11 +69,6 @@ public class SessionRaServiceImp implements SessionRaService {
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         return sessionMapper.mapToDto(session);
     }
-
-    private String generateUniqueRoomCode() {
-        return "ROOM" + System.currentTimeMillis();
-    }
-
     public SessionRaDto getSessionById(Long sessionId) {
         SessionRa session = sessionRaRepo.findById(sessionId)
                 .orElseThrow(() -> new RuntimeException("Session not found"));
@@ -87,12 +84,5 @@ public class SessionRaServiceImp implements SessionRaService {
                 .orElseThrow(() -> new RuntimeException("Session not found"));
         return session.getChats().stream().map(chatMapper::toDto).collect(Collectors.toList());
     }
-
-    /*@Override
-    public SessionRaDto createSession(SessionRaDto SessionDto) {
-        String roomCode = generateUniqueRoomCode();
-        SessionDto.setRoomCode(roomCode);
-        return SessionDto;
-    }*/
 
 }

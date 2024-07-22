@@ -20,4 +20,5 @@ public class SessionRaDto {
     private UserRaDto user;
     private Set<ChatDto> chats;
     private String roomCode;
+    private String sessionCode;
 }
